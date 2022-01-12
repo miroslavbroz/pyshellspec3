@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import os
 import sys
 import numpy as np
-import pyshellspec
+import pyshellspec3
 
 def read_lc(lfile):
     """
@@ -29,8 +29,7 @@ def read_if(ifile):
 # constants
 ra = (18 + 50 / 60. + 4.79525 / 3600.)/24.*360.
 dec = 33 + 21 / 60. + 45.6100 / 3600.
-#dir_data = '/home/mira/a/betalyr2/data_20200611_GOODPHI'
-dir_data = '/scratch/mira/a/betalyr2/data_20200611_GOODPHI'
+dir_data = 'data'
 
 def main():
     """
@@ -46,7 +45,7 @@ def main():
     names, pbands, errs = read_lc(infile)
     for i in range(0, len(names)):
         print(names[i])
-        obs.append(pyshellspec.LCData(filename=os.path.join(dir, names[i]),
+        obs.append(pyshellspec3.LCData(filename=os.path.join(dir, names[i]),
                                       passband=pbands[i],
                                       global_error=errs[i],
                                       delimiter=','))
@@ -57,7 +56,7 @@ def main():
     names = read_if(infile)
     for i in range(0, len(names)):
         print(names[i])
-        obs.append(pyshellspec.IFData(filename=os.path.join(dir, names[i]),
+        obs.append(pyshellspec3.IFData(filename=os.path.join(dir, names[i]),
                                       location='chara',
                                       ra=ra, dec=dec, 
                                       format='ascii', weight_vis2=0.5, weight_t3amp=0.5))
@@ -68,7 +67,7 @@ def main():
     names = read_if(infile)
     for i in range(0, len(names)):
         print(names[i])
-        obs.append(pyshellspec.IFData(filename=os.path.join(dir, names[i]),
+        obs.append(pyshellspec3.IFData(filename=os.path.join(dir, names[i]),
                                       location='npoi',
                                       ra=ra, dec=dec,
                                       format='ascii', exclude_t3amp=True))
@@ -81,7 +80,7 @@ def main():
     names = d[:, 1]
     for i in range(0, len(names)):
         print(names[i])
-        obs.append(pyshellspec.IFData(filename=os.path.join(dir, fnames[i]),
+        obs.append(pyshellspec3.IFData(filename=os.path.join(dir, fnames[i]),
                                       location='chara',
                                       ra=ra, dec=dec,
                                       format='ascii'))
@@ -93,34 +92,34 @@ def main():
     names = read_if(infile)
     for i in range(0, len(names)):
         print(names[i])
-        #obs.append(pyshellspec.DFData(filename=os.path.join(dir, names[i]), location='chara', ra=ra, dec=dec, format='fits'))
-        obs.append(pyshellspec.DFData(filename=os.path.join(dir, names[i]), location='chara', ra=ra, dec=dec, format='ascii'))
+        #obs.append(pyshellspec3.DFData(filename=os.path.join(dir, names[i]), location='chara', ra=ra, dec=dec, format='fits'))
+        obs.append(pyshellspec3.DFData(filename=os.path.join(dir, names[i]), location='chara', ra=ra, dec=dec, format='ascii'))
 
     # SED data
     dir = os.path.join(dir_data, 'burnasev')
-    obs.append(pyshellspec.SEDData(filename=os.path.join(dir,'Sed.dat')))
+    obs.append(pyshellspec3.SEDData(filename=os.path.join(dir,'Sed.dat')))
 
     # spectral data
     dir = os.path.join(dir_data, 'ondrejov_6670')
-    obs.append(pyshellspec.SPEData(filename=os.path.join(dir,'Spectra.dat')))
+    obs.append(pyshellspec3.SPEData(filename=os.path.join(dir,'Spectra.dat')))
 
     # construct data class
-    data = pyshellspec.Data(obs)
+    data = pyshellspec3.Data(obs)
 
     # construct the model
-    central = pyshellspec.CentralObject()
-    companion = pyshellspec.Companion()
-    nebula = pyshellspec.Nebula()
-    jet = pyshellspec.Jet()
-    spot = pyshellspec.Spot()
-    envelope = pyshellspec.Envelope()
-    shell = pyshellspec.Shell()
-    orbit = pyshellspec.Orbit()
+    central = pyshellspec3.CentralObject()
+    companion = pyshellspec3.Companion()
+    nebula = pyshellspec3.Nebula()
+    jet = pyshellspec3.Jet()
+    spot = pyshellspec3.Spot()
+    envelope = pyshellspec3.Envelope()
+    shell = pyshellspec3.Shell()
+    orbit = pyshellspec3.Orbit()
     objs = [central, companion, nebula, jet, spot, envelope, shell, orbit]
-    model = pyshellspec.Model(objects=objs)
+    model = pyshellspec3.Model(objects=objs)
 
     # construct the Interface
-    itf = pyshellspec.Interface(model=model, data=data, ncpu=8, image_size=180,
+    itf = pyshellspec3.Interface(model=model, data=data, ncpu=8, image_size=180,
         if_phase_precision=3,
         df_phase_precision=3,
         lc_phase_precision=2,
@@ -132,7 +131,7 @@ def main():
         sed_ew_precision=10,
         spe_ew_precision=10,
         shellspec_template="template.in",
-        shellspec_abundance="/scratch/mira/a/betalyr2/fitting_shell8_20200611/abundances",
+        shellspec_abundance=os.path.join(os.getcwd(), "abundances"),
         use_offset=True, use_differential=True,
         exclude_visphi=False, dry_run=False)
 
