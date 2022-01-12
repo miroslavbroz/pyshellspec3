@@ -1,0 +1,39 @@
+
+Approximations used in Shellspec:
+
++ LTE level populations
++ LTE ionisation levels
++ 1D line-of-sight transfer
++ optically thin (single) scattering only, not 3D, LI or ALI!
+- non-isotropic scattering
++ prescribed rho, T profiles
++ solar abundances
++ Voigt profile
++ thermal broadening
++ microturbulent
++ natural
++ Stark
++ Van der Waals
++ Doppler shift
++ HI bound-free continuum opacity
++ HI free-free
++ H− bound-free
++ H− free-free
+- Thomson scattering on free electrons
+- Rayleigh scattering on neutral hydrogen
+- Mie absorption on dust
+- Mie scattering
+- dust thermal emission
+- line opacity
+- opacity distribution function (?)
++ spherical primary
++ Roche secondary
+- black-body approximation (for *)
++ synthetic spectra (for *)
+- irradiation <- should be visible! 
+- reflection <- dtto
++ limb darkening
++ gravity darkening
++ heat transport
+
+

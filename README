@@ -1,0 +1,57 @@
+
+PYSHELLSPEC is an advanced astrophysical tool for modeling of
+binary systems with circumstellar matter (e.g. accretion disk, jet),
+computation of interferometric observables |V^2|, arg T_3, |T_3|,
+|dV|, arg dV, comparison of light curves, spectro-interferometry,
+spectra and SED with observations, and both global and local optimisation
+of system parameters. It is based on Shellspec, a 1-dimensional
+LTE radiation transfer code by Budaj & Richards (2004).
+
+If you use this code, please cite the original references:
+
+  M. Bro\v z, D. Mourard, J. Budaj, P. Harmanec, H. Schmitt,
+  I. Tallon-Bosc, D. Bonneau et al., Optically thin medium
+  in \beta Lyr A system, A&A submit.
+
+  D. Mourard, M. Bro\v z, J. Nemravov\'a, P. Harmanec, J. Budaj,
+  F. Baron, J.D. Monnier et al., Physical properties of \beta Lyr A
+  and its opaque accretion disk, A&A 618, A112.
+
+The code and examples can be downloaded from:
+
+  https://sirrah.troja.mff.cuni.cz/~mira/betalyr/
+
+The authors are Jana Nemravova and M. Broz, as described in the Changelog.
+
+--
+
+For differential evolution, it was necessary to download:
+
+  _differentialevolution.py
+
+put it in:
+
+  /usr/lib/python2.7/dist-packages/scipy/optimize/
+
+and modify __init.py__:
+
+  from ._differentialevolution import differential_evolution
+
+--
+
+Installation of several standard python modules was required:
+
+  apt-get install python
+  apt-get install python-matplotlib
+  apt-get install python-numpy
+  apt-get install python-scipy
+  apt-get install python-nlopt
+  apt-get install python-astropy
+
+Alternatively, one can use:
+
+  apt-get install python-pip
+  pip install astropy
+  ...
+
+

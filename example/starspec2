@@ -1,0 +1,46 @@
+#ntemp, number of different temperatures of the models
+21
+#temperatures [K], one per line
+10000
+10200
+10400
+10600
+10800
+11000
+11200
+11400
+11600
+11800
+12000
+12200
+12400
+12600
+12800
+13000
+13200
+13400
+13600
+13800
+14000
+#file names with spectra for each temperature, one per line
+pyterpol/starspec2_10000.abs
+pyterpol/starspec2_10200.abs
+pyterpol/starspec2_10400.abs
+pyterpol/starspec2_10600.abs
+pyterpol/starspec2_10800.abs
+pyterpol/starspec2_11000.abs
+pyterpol/starspec2_11200.abs
+pyterpol/starspec2_11400.abs
+pyterpol/starspec2_11600.abs
+pyterpol/starspec2_11800.abs
+pyterpol/starspec2_12000.abs
+pyterpol/starspec2_12200.abs
+pyterpol/starspec2_12400.abs
+pyterpol/starspec2_12600.abs
+pyterpol/starspec2_12800.abs
+pyterpol/starspec2_13000.abs
+pyterpol/starspec2_13200.abs
+pyterpol/starspec2_13400.abs
+pyterpol/starspec2_13600.abs
+pyterpol/starspec2_13800.abs
+pyterpol/starspec2_14000.abs

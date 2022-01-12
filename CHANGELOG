@@ -1,0 +1,154 @@
+
+Changelog:
+
+--
+
+Apply slips to synthetic data, not observational data,
+  so that we see always the same o. d.
+
+--
+
+Jet has higher priority than nebula.
+
+Envelope has lower priority than nebula.
+
+exit(1) in subroutine roche() if Newton-Raphson slipped
+
+Slips are initially set to zero in zero_slips().
+
+Barycentric velocity correction is applied to IF data
+  (see velocities.html in Astropy and Wright & Eastman 2014).
+
+--
+
+Shellspec50 and corresponding changes.
+
+Radial velocity field (a.k.a. disk wind) was added.
+
+Asymmetric jet (w. asymjt parameter) was added.
+
+--
+
+template.in was updated ("dd [pc]" must not contain a space)
+
+Fitting of SED and SPE data did not work, because sedsyn['wavesyn']
+  and sedsyn['fluxsyn'] arrays were not properly initialized.
+
+--
+
+Normalized spectra ("SPE") are also computed and chi^2 evaluated
+  (see e.g. Spectra.dat). It is actually a minor modification of
+  SED; the corresponding class SPEData is inherited from SEDData.
+
+Hermite polynomials are used for interpolation of spectra.
+
+An important correction in Pyterpol, namely PHOENIX absolute
+  synthetic spectra, which were  computed for vacuum wavelength,
+  but we need air wavelengths in Pyshellspec!
+
+--
+
+Spectral-energy distribution (SED) is now computed, Shellspec is
+  called in parallel for different phases; corresponding observations
+  can be also input (see e.g. Sed.dat) and chi^2 evalued.
+
+Semiamplitude K [km/s] was added to nebula and disk objects.
+
+--
+
+Differential visibility dif |V| is now computed (if use_differential=True).
+
+Visibility amplitude |V| and phase arg V observables were added both
+  to observations.py and interface.py.
+
+Shadowing was implemented in Shellspec; optically-thin scattering thus
+  can be modelled. Corresponding free parameters can be fitted.
+
+--
+
+Linear limb-darkening coefficients are interpolated for Teff, logg, Z
+  and all wavelengths (Van Hamme 1993).
+
+Nebula temperature inversion (tinvnb) is now linear from hinvnb up to aneb;
+  no more jumps which may create artefacts in low-resolution models.
+
+--
+
+dry_run and overwrite keywords were added to interface,
+  to make debugging and restart of hi-res simulations feasible.
+
+tempif* directories are created for each wavelength even if ncpu = 1.
+
+--
+
+Weigthing of |V^2| data is 1 (for VEGA), if no |T_3| are present.
+
+On the other hand, individual contributions to chi^2 are always
+  multiplied by 0.5 factor, if both |V^2| and |T_3| are present.
+
+--
+
+asini = sma*dinc parameter is now fixed instead of sma
+
+Ufo (i.e. low-priority disc) object was added to model extended
+  disc atmosphere, or scattered light (when ithom = iray = 0).
+
+Flow object was added to model off-center jet structures.
+
+--
+
+New shellspec43.f was used (with yet better optically thick transfer).
+  Nevertheless, one has to be still aware of artefacts arising from
+  sharp boundaries between thin/thick objects (like slab+ufo);
+  see large contrib. to contribution function cfi in split2() subroutine.
+
+An exit from a thread now exits the main thread too.
+
+hmulnb parameter was added (scale-height multiplication factor for nebula).
+
+--
+
+Another increase of modp = 10000000.
+
+--
+
+Individual chi^2 terms are output in *.syn.dat files.
+
+New shellspec39.f was used (with modified optically thick transfer).
+
+For |V^2| and |T_3|, the chi^2 is computed as 1/2 chi^2_V2 + 1/2 chi^2_T3.
+
+Nebula object was added (i.e. flared disk with exponential vertical profile).
+
+UV filters of OAO2 were added.
+
+Comments in observations ASCII files are allowed (removal of wrong data).
+
+Pyterpol synthetic spectra are used instead of black-body approximation.
+
+Line transfer is used in particular for the H_alpha wavelength.
+
+fit.log is of higher precision and contains numbers of observations.
+
+temp* directories are for ALL effective wavelengths (not for cpus);
+  otherwise it is not possible to debug the multi-cpu code!
+
+Old lightcurve, shellspectrum, shellspec.out files are properly deleted,
+  and pyterpol, starspec1, starspec2, line.dat files are symlinked.
+
+modp=1000000 is used in shellspec39.f to deal with optically thick medium.
+
+|T_3| for some datasets can be excluded (None values) independently of arg T_3.
+
+Output lightcurve (*.syn.dat) contains effective bandpass and offset.
+
+Bandpass fluxes [in J s^-1 m^-2] and UBVR magnitudes are correctly calculated,
+  so offsets are not needed anymore and SED can be fitted.
+
+Exitcodes in shellspec were added, as well as correspoding changes in pyshellspec.
+
+Checking of the wavelength range of synthetic spectra in shellspec.
+
+--
+
+

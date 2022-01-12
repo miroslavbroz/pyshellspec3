@@ -1,0 +1,8 @@
+
+This is an example chi^2 calculation (chi2.py) and fitting
+(i.e. almost the same fit.py).
+
+Neither observational data nor Pyterpol synthetic spectra
+are included here, though.
+
+

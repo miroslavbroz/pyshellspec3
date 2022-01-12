@@ -1,0 +1,878 @@
+# alam1[A]  alamn[A]  alams[A]  loglam  cutoff[A]
+  5510.0    5511.0      1.0       0     50. 
+# imodel  irotat  ipart   ichemc  ielnd
+   1       1       0       1       1    
+# ithom   irayl   imie    imiepf  ihyd   iopac  iline   eps     (opacities)
+   0       0       0       0       1      0      1      1.e0
+# ionu  ior  iot  offset
+1       1    1     0.0   
+# phase1[deg]  phasen[deg]  nphase    dinc[deg]
+0.             360.         0         88.0
+# dd[pc]   vgamma[km/s]
+323.       -1.
+# iext	  rv      ebv[mag]    reddening/extinction
+  0       3.1     0.3226
+#----------------spectra of the non-transparent objects---------------------
+# lunt1   xunt1   yunt1   
+1         1.      1.   
+# lunt2   xunt2   yunt2
+1         1.      1.    
+# lunt3   xunt3   yunt3
+0         1.      1.    
+#-----------------------A. body frozen grid ----------------------------
+# rmdfx1 rmdfx2 rmdfy1 rmdfy2 rmdfz1 rmdfz2 rmdfx3 rmdfx4 [R_sol]  
+ -80.0001     80.0001   -80.0001     80.0001   -30.0001    30.0001      0.    0.
+# stepfx[R_sol] stepfy[R_sol] stepfz[R_sol] gainfx gainfy gainfz  
+  0.5500000     0.5500000     0.5500000     1.0    1.0    1.0
+#-----------------------B. body frozen grid ----------------------------
+# rmdfx3  rmdfx4  rmdfy3  rmdfy4  rmdfz3  rmdfz4  [R_sol]  
+0.   0.           0.   0.         0.  0.   
+# stepfxb stepfyb stepfzb[R_sol]  gainfxb gainfyb gainfzb  
+0.2       0.2     0.2             1.0     1.0     1.0
+#-----------------------A. line of sight grid --------------------------
+# rmdx1  rmdx2  rmdy1  rmdy2  rmdz1  rmdz2  rmdz3  rmdz4 [R_sol]
+ -80.0     80.0   -30.     30.    -80.     80.      0.    0.
+# stepx[R_sol] stepy[R_sol] stepz[R_sol] gainx  gainy  gainz  
+  0.550000     0.5500000    0.5500000    1.0    1.0    1.0
+#-----------------------B. line of sight grid --------------------------
+# rmdx3   rmdx4   rmdy3   rmdy4   rmdz3   rmdz4   [R_sol]
+  0.   0.         0.  0.          0.    0.
+# stepxb  stepyb  stepzb[R_sol]   gainxb  gainyb  gainzb  
+0.2       0.2     0.2             1.0     1.0     1.0
+#-----------------------------objects---------------------------------------
+# ISTAR# ICOMP# ISPOT# ISM#  IRING# IDISC# IENV# 
+   1      2      1     0      0     0      0    
+# INEBL# IFLOW# IJET# IUFO#  ISHELL#
+   1      0      1     0      0
+#---------------------------- central star ---------------------------------
+# rstar[R_sol]   Tstar[K]   eMstar[M_sol]
+  5.987           30000.     13.048    
+# xstar  ystar  zstar  vrotst[km/s] (rotation) 
+0.      0.     1.       10.        
+# idifst drotst hst                 (differential rotation) 
+0        0.9    0.1
+# vxst[km/s] vyst[km/s] vzst[km/s]  (movement)
+0.           0.         0. 
+# dlst   dlst2  dgst   ffst         (darkening+shape)
+0.0      0.     0.25   0.00
+# irrst  ialbst albst  htst  htsta  (reflection effect)
+   0      0      0.3    0.6    1.
+# ispst xspst yspst zspst aspst[deg] tspst   (spot)
+   0     -1.    0.    1.    10.        0.9
+#----------------------------- companion -----------------------------------
+# rcp[R_sol]  tempcp[K]   qq           
+  19.8400      13300.     0.2230
+# vrxcp vrycp vrzcp vrotcp[km/s]    (rotation)
+   0.    0.    1.     10.         
+# xcp[R_sol] ycp[R_sol] zcp[R_sol]  (location)
+  58.349       0.         0.       
+# vxcp[km/s] vycp[km/s] vzcp[km/s]  (movement)
+   0.         0.      0.  
+# dlcp  dlcp2  dgcp   ffcp          (darkening+shape)
+0.0     0.0    0.25   1.00
+# irrcp  ialbcp albcp  htcp  htcpa  (reflection effect)
+   0      0      0.     1.    1.
+#------------------------------ spot ---------------------------------------
+# vrxsp vrysp vrzsp vrotsp[km/s] rsp[R_sol]
+  0.    0.    1.     0.         250.
+# xsp[R_sol] ysp[R_sol] zsp[R_sol] vxsp[km/s] vysp[km/s] vzsp[km/s]
+0.          0.         0.          0.         0.        0.
+# tempsp[K]  denssp   anesp   vtrbsp  dstdsp  dsttsp[K]
+   3500.     1.e-19     21.e9     0.   9.e-17  3500.
+#------------------------------- stream ------------------------------------
+# v1sm[km/s]  v2sm[km/s]  r1sm[R_sol]  r2sm[R_sol]  
+  100.        100.        0.2          0.2
+# x1sm[R_sol] y1sm[R_sol] z1sm[R_sol]    (beginning)
+  0.         -0.2         0.    
+# x2sm[R_sol] y2sm[R_sol] z2sm[R_sol]    (end)
+  0.          0.2         0.
+# vxsm[km/s]  vysm[km/s]  vzsm[km/s]     (net velocity)
+  0.          306.4       0.
+# xsm         ysm         zsm          Psm[d] (rotational drag)
+  0.          0.          1.           1.e30 0.4387
+# tempsm[K]   denssm      anesm   vtrbsm  edensm  dstdsm    dsttsm[K]
+8000.         11.e-15     21.e9   10.      0.    10.e-15    1400.
+#------------------------------ ring ---------------------------------------
+# rrg[R_sol] emrg[Msol]               
+2.8          0.7
+# b1rg[deg] b2rg[deg]                      (arc)
+360.          280.
+# a1rg[R_sol] a2rg[R_sol] dr1rg[R_sol] dr2rg[R_sol] 
+  0.1         0.3          0.1          0.3
+# xrg[R_sol] yrg[R_sol] zrg[R_sol]     (location)
+  0.          0.        0.
+# xpolrg ypolrg zpolrg              (orientation)
+0.     0.     1.   
+# vxrg[km/s] vyrg[km/s] vzrg[km/s] (net velocity)
+0.          0.         0.     
+# temprg[K]   densrg     anerg  vtrbrg  itrg 
+2100.         1.e-30 	 1.e1   0.      2    
+# edenrg  dstdrg     ede2rg  dst2rg    dsttrg[K]
+ -25.     4.65e-15   -6.     0.43e-15   2100.
+#------------------------------ disc ---------------------------------------
+# adisc[deg,R_sol]  rindc[R_sol]  routdc[R_sol]  emdc[Msol] rdc[Rsol]
+12.                  6.00          30.           13.049       5.987
+# xdc[R_sol] ydc[R_sol] zdc[R_sol]     (location)
+0.     0.     0. 
+# xdisc ydisc zdisc                 (orientation)
+0.     0.     1.   
+# vxdc[km/s] vydc[km/s] vzdc[km/s]  (net velocity)
+0.            0.       0.     
+# tempdc[K]   densdc     anedc  vtrbdc  edendc itdc etmpdc
+30000.        1.0e-6      12.e9    10.   -1.     3  -0.85
+# dstddc    dsttdc[K]
+0.          1000.
+#---------------------------- envelope -------------------------------------
+# emen[M_sol]  qqen   aen[R_sol]  ffen  hen[R_sol]
+  13.048      0.2230   58.349      1.0    12.
+# tempen[K]  densen   aneen   vtrben  dstden  dstten[K]
+   9000.      1.e-8    21.e9     0.   0.0000  7050.
+#---------------------------- nebula ---------------------------------------
+# aneb[H]      rinnb[R_sol]  routnb[R_sol]  emnb[Msol] rnb[Rsol]
+9.0            6.00          30.            13.049     5.987
+# iinvnb hinvnb[H]   tinvnb               (temp.inversion)
+  1      8.0      6.0   
+# hwindnb[H]  idennb  hcnb[H]             (wind/H-scale)
+ 8.0     0         12.0
+# ivelnb       hvelnb[H] vnb[km/s] evelnb (radial velocity field)
+1              0.1       200.      0. 
+# ishdnb hshdnb                           (shadow)
+ 1       1.0
+# xneb yneb zneb                          (orientation)
+0.     0.     1.   
+# vxnb[km/s] vynb[km/s] vznb[km/s]        (net velocity)
+0.            0.         0.     
+# tempnb[K]   densnb     anenb  vtrbnb  edennb itnb etmpnb
+30000.        1.0e-6      12.e9    10.   -1.     3  -0.85
+# dstdnb    dsttnb[K]
+0.          1000.
+#------------------------------- flow - ------------------------------------
+# v1fw[km/s]  v2fw[km/s]  r1fw[R_sol]  r2fw[R_sol]  
+  100.        100.        0.2          0.2
+# x1fw[R_sol] y1fw[R_sol] z1fw[R_sol]    (beginning)
+  2.92         -0.2         0.    
+# x2fw[R_sol] y2fw[R_sol] z2fw[R_sol]    (end)
+  2.92         0.2        0.
+# vxfw[km/s]  vyfw[km/s]  vzfw[km/s]     (net velocity)
+  0.          -30.3       0.
+# xfw         yfw         zfw          Pfw[d] (rotational drag)
+  0.          0.          1.           0.4387
+# tempfw[K]   densfw      anefw  vtrbfw  edenfw  dstdfw  dsttfw[K]
+8000.         11.e-15     21.e9  10.      0.     10.e-30   8000.
+#------------------------------ jet ----------------------------------------
+# ajet[deg]  rinjt[R_sol] routjt[R_sol]       (shape)
+  6.        2.           10.           
+# xjt[R_sol] yjt[R_sol] zjt[R_sol]            (location)
+  0.         0.         0.
+# xjet       yjet       zjet                  (orientation)
+  0.         0.         1.
+# ivjt       vjt[km/s]  eveljt   rcjt[R_sol]  (velocity field)
+  2          500.       1.       1.9
+# vxjt[km/s] vyjt[km/s] vzjt[km/s]            (net velocity)
+  0.         0.         0.     
+# tempjt[K]  densjt     anejt    vtrbjt  dstdjt   dsttjt[K] etmpjt asymjt
+8000.        2.e-11     1.e9     10.     0.e0     1000.     0.     0.0
+#------------------------------ ufo  ---------------------------------------
+# aufo[deg,Rsol] rinuf[Rsol] routuf[Rsol] emuf[Msol] ruf[Rsol] 
+2.                2.         6.          2.63        1.95
+# xuf[R_sol] yuf[R_sol] zuf[R_sol]  (location)
+0.     0.     0.
+# xufo  yufo   zufo                 (orientation)
+0.     0.     1.   
+# vxuf[km/s] vyuf[km/s] vzuf[km/s]  (net velocity)
+0.           -200.         0.     
+# tempuf[K]  densuf     aneuf  vtrbuf  edenuf ituf  etmpuf
+8000.        30.e-15	21.e5   20.      0.     1   -0.5
+# dstduf  dsttuf[K]
+5.7e-30  8000.
+#----------------------------- shell ---------------------------------------
+# rinsh[R_sol]  routsh[R_sol]   vsh[km/s] 
+10.              15.            1.
+# evelsh  rcsh[R_sol]  
+  0.      4.4
+# vxsh[km/s] vysh[km/s] vzsh[km/s]  (net velocity)
+0.           -46.         0.     
+# tempsh[K] denssh     anesh  vtrbsh  dstdsh  dsttsh[K]  etmpsh
+9000.      30.e-15     21.e9  500.    1.e-30  9000.      0.0
+#--------------------------- background ------------------------------------
+# temp0[K]  dens0    ane0       v0[km/s] 
+4000.      0.e0     1.e7       0. 
+#-----------------------------end of input----------------------------------
+c-----------------------------------------------------------------------
+c       Definition of the input quantities:                             
+c       alam1, alamn, alams -start,end and step of wavelength in [A]    
+c       loglam=0 equidistant step im lambda
+c       loglam=1 equidistant step in log(lambda), the number of steps
+c               will be the same as for loglam=0
+c       cutoff - extension of the <alam1,alamn> interval in [A] when
+c               reading the gas_opac table. Assuming that 
+c               broadening by the velocity field dominates:
+c               cutoff>maximal radial velocity/c*lambda 
+c       imodel=1  calculate your own input shell model                  
+c       imodel=2  read input shell model from `shellspec.mod'.          
+c               You can ignore most of input below defining geometry,   
+c               the velocity field and state quantities of objects but
+c               you must still input the data for the scattering:           
+c                 rstar,tstar,vxst,vyst,vzst                              
+c               for the coordinate rotation:                        
+c                 temp0,ane0,xcp,ycp,zcp 
+c               and for the limb darkening:
+c                 istar,rstar,tstar,dlst,dlst2,
+c                 icomp,rcp,tempcp,dlcp,dlcp2,xcp,qq
+c               and switches: lunt1,lunt2,lunt3,ithom,irayl,
+c                 imie,imiepf,ihyd,iopac,iline,eps
+c       irotat -option of interpolation from the body frozen grid
+c               to the line of sight grid during the coord. rotation
+c               0=linear interpolation, good for continuous fields,
+c                 otherwise the result may depend on discontinuities
+c                 or background (temp0,ane0,...)
+c               1=nearest neighbour approximation, may be less smooth
+c                 but can handle discontinuities
+c       ipart  -option of partition functions 
+c               [1-built in Dworetsky & Smalley, 2-Irwin]
+c               (only ipart=1 is implemented so far)
+c       ichemc -option of abundances, if ielnd=1 then ichemc=1                                     
+c               [0-default solar, 1-read from file `abundances']       
+c       ielnd=1 electron number densities provided in the input model
+c               are ignored and code calculates el.num.dens. 
+c               assuming LTE, from known temperature, density and 
+c               chemical composition. File 'abundances' is read and must
+c               contain 3.column which specifies which elements are
+c               considered in Ne calculations, this sets ichemc=1
+c       ielnd=0 electron number densities are known apriori and are
+c               specified in the input model
+c       ithom=0 Thomson scattering is off
+c       ithom=1 Thomson scattering from stars is on 
+c               (assumes optically thin environment)
+c       irayl=0 Rayleigh scattering on neutral hydrogen is off.
+c               If Lyman lines are treated explicitely in the linelist
+c               set irayl=0 not to count the contribution twice
+c       irayl=1 Rayleigh scattering from stars on neutral hydrogen is on 
+c               (assuming optically thin environment)
+c       imie=0  Mie scattering and absorption on dust is off
+c       imie=1  Mie scattering+absorption opacity is on.
+c               Several species or input files can be included.
+c               dust_opac file with tables must be provided.
+c               Mie thermal and scattering emissivity on dust is on.
+c               It is scattering of light from the stars assuming
+c               optically thin medium.
+c               Scattering emission can be isotropic or  
+c               non-isotropic (see imiepf).
+c       imie=2  Mie scattering+absorption opacity is on
+c               Mie thermal emissivity is on, but
+c               Mie scattering emissivity is off
+c       imie=3  Mie scattering+absorption opacity is on
+c               Mie thermal emissivity is on
+c               Mie scattering emissivity is on but is isotropic and
+c               assumes J=B(T) i.e. it is not scattered light from stars
+c       imiepf  angular dependence of the scattered light from stars,
+c               has an effect only if imie=1 
+c       imiepf=1 angular dependent scattering emissivity, 
+c               reads extra table with phase functions (mie_phase),
+c               otherwise it is isotropic
+c               In case there are several species in dust_opac 
+c               this will redistribute the total scattering opacity. 
+c       ihyd=1  hydrogen bound-free and free-free opacity is turned on
+c               assuming only atomic H (no molecules)
+c       iopac=1 additional tabulated gas true opacity is added
+c               reads extra table with gas opacities (no scattering)
+c       iline=0 No line opacity   
+c       iline=1 line opacity is included. Spectral line parameters must
+c               be specified in the file 'line.dat'
+c       eps -artificial number <0.,1.> for test purpose which splits    
+c               the line opacity (emissivity) into the true             
+c               absorbtion (eps->1.) and coherent scattering (eps->0.). 
+c               In LTE eps=1. ( S=eps*B+(1-eps)*J )  
+c               If ithom=irayl=0 set also eps=1. for consistency                   
+c       ionu, ior, iot -sequential indexes of frequency, x, and y point 
+c               for which you want a more detailed output along the line
+c               of sight (specified by x,y) 
+c       offset -vertical shift applied to the normalized spectra output
+c               to plot many spectra from different rotation phases        
+c       phase1, phasen - start, end of the phase interval you want 
+c               to cover [deg] (e.g. if xcp>0,ycp=zcp=0, dinc=90 then
+c               phase1=-90 will start from the primary eclipse)
+c       nphase -number of rotations (different view points) within 
+c               the interval above
+c               if nphase=0 then phase1 and phasen are ignored, and it
+c               reads one column from the file `phases' with phases. 
+c               These are values <0,1> and count from the x axis 
+c               so that phase=0.0 or 1.0 is primary eclipse 
+c               if xcp>0,ycp=zcp=0, dinc=90
+c       dinc   -angle between rotation axis of the model and the line
+c               of sight [deg], dinc=90.0 is edge on.
+c       dd   -distance from the Earth in [pc]
+c----------------intrinsic spectra specifications:
+c       lunt1=0 all objects with density from <dcut1,dcut2> interval are 
+c               nontransparent blackbodies with the same temperatures as
+c               in the case of transparency. 
+c       lunt1>0 all objects with density within <dcut1,dcut2> are 
+c               nontransparent and have an intrinsic intensity spectrum.
+c               The spectrum is read from file `starspec1'.
+c       lunt1=1 the x,y column input required with wavelength [A] and
+c               H_lambda flux [erg/cm^2/s/A] (as an output of SYNSPEC)
+c       lunt1=2 the x,y column input required with wavelength [A] and
+c               I_nu intensity [erg/cm^2/s/Hz/sterad] 
+c       lunt1=3 the 4 column input required with idummy,frequency [Hz],
+c               dummy, F_nu flux [erg/cm^2/s/Hz]
+c               (output of coolTlusty, unit 21, first 2 rows are dummy) 
+c       xunt1  -multiplication factor applied to starspec1 x-column
+c               if it is not in the correct-required units
+c               (otherwise set it =1.)
+c       yunt1  -multiplication factor applied to starspec1 y-column
+c               if it is not in the correct-required units
+c               (otherwise set it =1.)
+c       lunt2,xunt2,yunt2 -the same meaning as above except that these
+c               deal with density interval <dcut2,dcut3> and
+c               the spectrum is read from file `starspec2'. 
+c       lunt3,xunt3,yunt3 -the same meaning as above except that these
+c               deal with density interval <dcut3,dcutn> and
+c               the spectrum is read from file `starspec3'.          
+c-----------definitions of grids:
+c       rmdfx1<rmdfx2, rmdfy1<rmdfy2, rmdfz1<rmdfz2 - define 
+c         the box of the body frozen frame (if imodel=1)
+c       rmdfx3<rmdfx4 -define an additional box on the x-coordinate 
+c         It will have the same (rmdfy1,rmdfy2,rmdfz1,rmdfz2) dimension.
+c         rmdfx1<rmdfx2<rmdfx3<rmdfx4
+c       stepf -is a mean distance between the x,y grid points [R_sol]
+c       stepfz -is a mean distance between the z grid points [R_sol]
+c         They determine the number of grid points:
+c       nbodf1, nbodf2, nbodf3 -number of grid points in x, y, z (>=1)
+c         direction in body frozen coordinates of the model.
+c         (Points are overridden 
+c         by the values from `shellspec.mod' if imodel=2)
+c       gainfx, gainfy, gainfz -grid step multiplication factors
+c         of the body frozen grid to allow for logarithmic grid 
+c         [gainfx=(x_{i+1}-x_{i})/(x_{i}-x_{i-1})]
+c         e.g. gainfx=1. for equidistant step
+c         gainfx>1. step increases symetrically from the middle to 
+c         the left and to the right
+c       rmdx1<rmdx2, rmdy1<rmdy2, rmdz1<rmdz2 - define the box
+c         of the observer's line of sight frame. 
+c       rmdz3<rmdz4 -define an additional box on the z-coordinate.
+c         rmdz1<rmdz2<rmdz3<rmdz4
+c         Observer looks along the opposite z-direction.
+c       steps -is a mean distance between the x,y grid points [R_sol]
+c       stepsz -is a mean distance between the z grid points [R_sol]
+c         They determine the number of grid points:
+c       nbod1, nbod2, nbod3 -number of grid points in x, y, z (>=1)  
+c         in the line of sight observer's frame.
+c       gainx, gainy, gainz -grid step multiplication factors
+c         (common ratio of the geometric sequence) of the line of sight
+c         grid    [gainx=(x_{i+1}-x_{i})/(x_{i}-x_{i-1})]
+c         e.g. gainx=1. for equidistant step
+c         gainx>1. step increases symetrically from the middle to 
+c         the left and to the right
+c-----------------object definitions:
+c       istar,icomp,ienv,ispot,ism,iring,idisc,
+c       inebl,iflow,ijet,iufo,ishell
+c                 see below
+c-------primary star (central object)----------
+c       istar=0 accompanied by rstar=0 will switch off the primary
+c       istar=1 central object is a nontransparent uniformly rotating
+c         sphere. Its density is set to <dcut1,dcut2>. It can be either 
+c         black body with T=tstar if lunt1=0 or has its intrinsic 
+c         intensity spectrum if lunt1>0. In case of scattering or 
+c         reflection of its light by other objects its rotation is 
+c         ignored.
+c         Code ignores: dgst,ffst,qq                 
+c       istar=2 central object is a detached component of a binary.       
+c         It has a Roche shape defined by ffst<=1, synchronous rotation,
+c         is nonstrasparent with density within <dcut1,dcut2>.  
+c         It can be either black body with T=tstar if lunt1=0 or 
+c         has its intrinsic intensity spectrum if lunt1>0. 
+c         You must also set: xcp>0,qq>0
+c         Code also calculates/ignores: xstar,ystar,zstar,vrotst
+c         ,drotst,hst,rstar
+c       istar=3 central object is a figure 8 contact system. It has
+c         a Roche shape defined by 1<ffst<=2, synchronous rotation,
+c         is nonstrasparent with density within <dcut1,dcut2>.  
+c         It can be either black body with T=tstar if lunt1=0 or 
+c         has its intrinsic intensity spectrum if lunt1>0. 
+c         You must also set: xcp>0,qq>0
+c         Code also calculates/ignores: 
+c           xstar,ystar,zstar,vrotst,drotst,hst,rstar,icomp
+c       if istar>1 or icomp>1 or (istar>0 and icomp>0 and vxst>clight)
+c         then code calculates (from emstar,xcp,qq):
+c         ycp,zcp,vxst,vyst,vzst,vxcp,vycp,vzcp
+c         assuming circular orbit.
+c       rstar -radius of the central star in [R_sol] 
+c         if istar>1 (Roche Geometry) this value will be used for
+c         scattering in the circumstellar matter and irradiation effect 
+c         on the companion which use spherical approximation
+c       tstar -effective temperature of the central star in [K]
+c         without gravity darkening and irradiation. This value will 
+c         be used for scattering in the circumstellar matter (in case 
+c         of black body) and irradiation effect on the companion
+c         if istar=2 it is the temperature at the rotation pole 
+c         if istar=3 it is the temperature at the rotation pole of
+c         the more massive star
+c       emstar -mass of the central star in [M_sol]
+c       xstar,ystar,zstar -define unit aiming vector of the rotational        
+c         axis of the central star         
+c       vrotst -equatorial rotation velocity of the central star [km/s]
+c         in case istar=1 corresponding to the equatorial angular vel.  
+c       idifst -on/off differential rotation only for istar=1
+c       idifst=0 no differential rotation
+c       idifst=1 smooth differential rotation
+c         omega(phi)=omega_eq-(omega_eq-omega_pol)*sin(phi)**2
+c       idifst=2 step function differential rotation
+c         omega(phi)=omega_eq  for z/rstar<hst
+c         omega(phi)=omega_pol for z/rstar>hst
+c       drotst - the ratio of angular velocity at the rotation pole to
+c         the angular vel. at the equator: drotst=omega_pol/omega_eq.
+c       hst -break in the step function =z/rstar for idifst=2
+c       vxst, vyst, vzst -net velocity components                 
+c         of the center of mass of the central star [km/s]
+c         (if vxst>clight and istar>0 and icomp>0 then see istar)
+c       dlst -limb darkening coefficient of the central star
+c       dlst2 -second limb darkening coefficient 
+c            I=1-dlst*(1-mu)-dlst2*(1-mu)**2
+c       dgst -gravity darkening coefficient (beta) of the central star
+c         (0.25 for radiative, 0.08 for convective atmospheres)
+c         It is dummy if istar=1.
+c       ffst<=1 -Roche lobe fill-in factor of the primary. Its is
+c         the distance of the inner substellar point of the primary
+c         (between the stars) from the center of the primary relative
+c         to the distance to L1, the Roche lobe is reproduced if ff=1
+c       1<ffst<=2 -Roche lobe fill-out factor of the contact system
+c               ffst=(C1-C)/(C1-C2)+1
+c               It is dummy if istar=1.
+c       irrst=0 -irradiation and reflection effect is off
+c           (ialbst,albst,htst,htsta have no meaning in this case)
+c       irrst=1 -irradiation of the object from the companion is on.
+c           Irradiation (heating) applies only if istar=1,2.
+c           Reflection of the sp. of companion applies if istar=1,2
+c           (rcp,tempcp>0 ... are presumed).
+c       ialbst=1 monochomatic albedo is red from file=albedo1 
+c           (if irrst=1). It should be compatible with Bond albedo.
+c       albst  -Bond albedo <0,1>
+c       htst   -heat redistribution parameter in case of irradiation, 
+c           fraction of the heat absorbed on the day side which is 
+c           redistributed over the day-night sides, <0,1>, 
+c           0-nothing is redistributed and nothing goes to the night, 
+c           1-all the energy (which is not reflected) impinging on 
+c           the planet is evenly distributed over the day-night sides.
+c           It is analoguous to the so called Pn parameter of A.Burrows
+c           (a fraction of the irradiating energy impinging on 
+c           the day side which is transfered to and irradiated from 
+c           the night side), Pn=(1-albst)*htst/2
+c       htsta  -degree of the inhomegenity of the heat transport, <0,1>.
+c           1-homegeneous, 0-cosine dependence
+c           T**4=T0**4(htsta+4(1-htsta)/pi*cos_latitude)
+c       ispst=1/0 will turn on/off a spot on the star if istar=1
+c           (it has the shape of a circle)
+c       xspst,yspst,zspst -define unit aiming vector of the location
+c           of the spot center on the surface 
+c       aspst -angular radius of the spot in [deg]
+c       tspst -ratio of the spot temperature to the ambient temperature
+c           (i.e. temperature accounted for e.g. the reflection effect)
+c-------
+c       temp*,dens*,ane* - state quantities in various objects   
+c               temperature, density, electron number density [K,CGS]
+c       vtrb* - microturbulent velocity in various objects [km/s],
+c               it does not apply to nontransparent objects
+c       dstd* - density of dust in various objects [g/cm^3]
+c       dstt* - temperature of dust in various objects [K]
+c-------companion or secondary star
+c       icomp=0 secondary off
+c       icomp=1 secondary on, it is a uniformly rotating nontransparent
+c               sphere. It may be a blackbody with T=tempcp if lunt2=0
+c               or has its own spectrum if lunt2>0. Its density is set 
+c               to <dcut2,dcut3>. Code ignores: dgcp,ffcp,qq
+c       icomp=2 secondary is a detached component of a binary.
+c         It has a Roche shape defined by ffcp<=1, synchronous rotation,
+c         is nonstrasparent with density within <dcut2,dcut3>.  
+c         It can be either black body with T=tempcp if lunt2=0 or 
+c         has its intrinsic intensity spectrum if lunt2>0. 
+c         You must set: xcp>0,qq>0,emstar>0
+c         Code also calculates/ignores: vrxcp,vrycp,vrzcp,vrotcp,rcp
+c       rcp  -radius of the spherical companion [R_sol],
+c         if icomp=2 this input is used only for the scattering 
+c         and irradiation from the object otherwise it is superfluous 
+c       tempcp -see primary star above, this value is used for 
+c         the scattering on the circumstellar material and irradiation 
+c         of the primary
+c       qq -mass ratio (companion/star), important only for Roche geom.
+c           if istar>1 or icomp>1
+c       vrxcp, vrycp, vrzcp -define unit aiming vector of the rotational      
+c         axis of the secondary star (companion)
+c       vrotcp -equatorial rotation velocity of the companion [km/s]
+c       xcp,ycp,zcp -location of the center (of mass) of 
+c               the companion [R_sol]
+c       vxcp,vycp,vzcp -components of the velocity vector of the center 
+c               (of mass) of the companion [km/s]
+c       dlcp -limb darkening coefficient of the secondary star
+c       dlcp2 -second limb darkening coefficient (the same as dlst2)
+c       dgcp -gravity darkening coefficient (beta) of the secondary
+c       ffcp<=1 -Roche lobe filling factor of the secondary is 
+c         the distance of the inner substellar point of the secondary
+c         from the center of the secondary relative to 1-L1, 
+c         the Roche lobe is reproduced if ffcp=1 
+c       irrcp=0 -irradiation and reflection effect is off
+c           (ialbcp,albcp,htcp,htcpa have no meaning in this case)
+c       irrcp=1 -irradiation of the secondary from the primary is on.
+c           Irradiation (heating) applies only if icomp=2.
+c           Reflection (of the spectrum of primary) applies if icomp=1,2
+c           (istar=1,2 and rstar,tstar>0 are presumed)
+c       ialbcp=1  monochomatic albedo is red from file=albedo2
+c           (if irrcp=1). It should be compatible with the Bond albedo.
+c       albcp  -Bond albedo <0,1>
+c       htcp   -heat transport parameter in case of the irradiation. 
+c           The same as htst, <0,1>.
+c       htcpa  -degree of the inhomegenity of the heat transport, <0,1>. 
+c           1-homegeneous, 0-cosine dependence, the same as htsta.
+c-------envelope around the primary star
+c       ienv,emen,ggen,ffen have similar meaning to istar,emstar,qq,ffst
+c       ienv=2 envelope is on, has a detached Roche shape
+c       ienv=3 envelope is on, has a contact Roche shape
+c           (common envelope)
+c       emen -mass of the central star [M_sol]
+c       qqen -mass ratio (companion/star)
+c       ffen<=1 -Roche lobe fill-in factor of the detached envelope. 
+c         Its is radius of the substellar point of the envelope
+c         relative to the radius of the L1. Roche lobe has ffen=1.
+c       1<ffen<=2 -Roche lobe fill-out factor of the contact envelope
+c               ffen=(C1-C)/(C1-C2)+1
+c       hen -vertical limit [R_sol], limits the envelope in 
+c         the direction perpendicular to the orbital plane to z<+-hen
+c       tempen -constant temperature [K]
+c       densen -constant gas density [g/cm^3]
+c       aneen -constant electron number density [cm^-3]
+c       dstden -constant dust density [g/cm^3]
+c       dstten -constant dust temperature [K]
+c       vtrben -microturbulence [km/s]
+c-------spot or third star
+c       ispot=0 spot is off
+c       ispot=1 spot is on, it is a uniformly rotating sphere
+c       vrxsp, vrysp, vrzsp -define unit aiming vector of the rotational      
+c               axis of the spot
+c       vrotsp -equatorial rotation velocity of the spot [km/s]
+c       rsp  -radius of the spherical spot [R_sol]
+c       xsp,ysp,zsp -location of the center of the spot [R_sol]
+c       vxsp,vysp,vzsp -components of the velocity vector of the center 
+c               of the spot [km/s]
+c       tempsp -constant temperature [K]
+c       denssp -gas density [g/cm^3]
+c       anesp -electron number density [cm^-3]
+c       dstdsp -dust density [g/cm^3]
+c       dsttsp -dust temperature [K]
+c       vtrbsp -microturbulence [km/s]
+c-------stream
+c       ism=0/1  -stream off/on
+c       v1sm   -stream velocity at the beginnig of stream [km/s]
+c       v2sm   -stream velocity at the end of stream [km/s]
+c         velocity is directed from beginning to end 
+c       r1sm    -radius of the stream at the beginning [R_sol]
+c       r2sm    -radius of the stream at the end [R_sol]
+c         notice that although the radius changes the streamlines 
+c         are parallel (contrary to jet) 
+c       x1sm,y1sm,z1sm -position of the beginning of the stream [R_sol]
+c       x2sm,y2sm,z2sm -position of the end of the stream [R_sol]
+c       vxsm, vysm, vzsm -net velocity [km/s]
+c         you can use it also to mimic orbital drag or if the center
+c         of rotation is not at the center of coordinates
+c       xsm,ysm,zsm -rotational vector of stream
+c       psm -rotational period of stream in days
+c       tempsm -temperature [K], constant along the stream 
+c       denssm - is density at the beginning [g/cm^3] and scales along
+c         the stream to satisfy the continuity equation: 
+c         density=denssm*v1sm*r1sm**2/(vsm*rsm**2)*exp(t/rsol*edensm)
+c         where t is distance along the stream and exp term allows
+c         e.g. for a dust destruction
+c       anesm - electron number density at the beginning [cm^-3],
+c         similar to the density but if ielnd=1 then it is overriden by
+c         the calculation from the state quantities
+c       edensm -density dependence exponent to enable the modeling 
+c         of additional phenomena
+c       dstdsm -dust density [g/cm^3], it changes along the stream like 
+c         the gas density
+c       dsttsm -dust temperature [K], constant along the stream
+c       vtrbsm -microturbulence velocity [km/s]
+c-------ring
+c       iring>0 ring is on
+c       rrg -radius of the ring [R_sol]
+c       emrg -mass in its center to calculate velocities [Msol]
+c       b1rg, b2rg -specifies the arc from-to in [deg], b1rg><b2rg
+c         The location of the zero angle is not simple to explain so 
+c         test it first or consult subroutine trans. In many cases
+c         it will be along the x axis.
+c       a1rg,a2rg -vertical half width of the ring at the beginning
+c         and end of the arc in [R_sol]
+c       dr1rg, dr2rg -horizontal half thickness the ring at 
+c         the beginning and end of the arc in [R_sol]
+c         The crosssection, C, of the ring may vary along the arc and
+c         is C1=4*a1rg*dr1rg at the beginning.
+c       xrg, yrg, zrg -location of the center in [R_sol]
+c       xpolrg, ypolrg, zpolrg -orientation of the polar axis
+c       vxrg, vyrg, vzrg -net overall space velocity [km/s]
+c       edenrg, ede2rg -density dependence exponent to enable 
+c         the modeling of additional phenomena. Density, dust density 
+c         and electron number density change along the ring (arc) 
+c         to safisfy continuity equation+additional phenomenon 
+c         e.g. destruction (lifetime) of dust grains along the arc. 
+c       dstdrg, dst2rg -dust density at the beginning (b1rg). If
+c       itrg=1 then
+c         gas density=densrg*C1/C*[|t-b1rg|/pi+1]**edenrg
+c         electron num. density=anerg*C1/C*[|t-b1rg|/pi+1]**edenrg
+c         dust density=dstdrg*C1/C*[|t-b1rg|/pi+1]**edenrg+
+c                 dst2rg*C1/C*[|t-b1rg|/pi+1]**ede2rg
+c       itrg>or< 1 then
+c         gas density=densrg*C1/C*dexp[|t-b1rg|/pi]**edenrg
+c         electron num. density=anerg*C1/C*dexp[|t-b1rg|/pi]**edenrg
+c         dust density=dstdrg*C1/C*dexp[|t-b1rg|/pi]**edenrg+
+c                dst2rg*C1/C*dexp[|t-b1rg|/pi]**ede2rg
+c         where t-is angle along the arc.
+c       densrg -gas density at b1rg
+c       anerg -electron number density at b1rg
+c       temprg -constant gas temperature [K]
+c       dsttrg -constant dust temperature [K]
+c       vtrbrg -microturbulence
+c-------disk (accretion disk around some object)
+c       idisc=0 switch off the disc		
+c       idisc=1 disc has the shape of a rotating wedge
+c               limited by inner and outer radii (spherical surfaces)
+c       idisc=2 disc has the shape of a slab
+c               limited by inner and outer radii (spherical surfaces)
+c       idisc=3 disc has the shape of a rotating ellipsoid
+c               limited by inner spherical and outer ellipsoidal surface
+c       adisc -angular halfwidth of the disc wedge [deg] 
+c              (if idisc=1)
+c             -half of the thickness of the disc slab [R_sol] 
+c              (if idisc=2)
+c             -semiaxis of the ellipsoid along the rotational axis 
+c              [R_sol] (if idisc=3)	
+c       rindc -inner radius of the disc [R_sol]
+c       routdc -outer radius of the disc [R_sol] or
+c              -semiaxis of the ellipsoid perpendicular to the rotation 
+c               axis, if idisc=3, [R_sol]
+c       emdc -mass of the object in the disk center [M_sol]
+c         it determines its Keplerian velocity
+c       rdc  -radius of the object in the disk center [R_sol]
+c         it determines its temperature structure if itdc=2
+c       xdc,ydc,zdc -location of the disk center in [R_sol]
+c       xdisc,ydisc,zdisc -components of the unit aiming vector of 
+c               the rotational axis of the Keplerian disc around emstar
+c       vxdc, vydc, vzdc -net velocity components                 
+c               of the center of the disc [km/s]
+c       densdc -gas density at rindc 
+c       anedc  -electron num. density at rindc 
+c       tempdc -characteristic gas temperature, see below
+c       edendc -radial density dependence exponent 
+c               (dens, ane and dust density are a function of r)
+c               Rho(r) ~ Ne(r) ~ densdc*(r/rindc)**edendc	                        
+c       itdc=1  disc temperature is constant (=tempdc)
+c       itdc=2  disc temperature is a function of r (accretion discs)
+c               T(r)=tempdc*(rdc/r)**0.75*(1-(rdc/r)**0.5)**0.25       
+c       itdc=3  disc temperature as a power law (e.g. protopl. discs)
+c               T(r)=tempdc*(r/rindc)**etmpdc
+c       etmpdc  -exponent of the radial temperature dependence
+c       dstddc  -dust density at rindc
+c       dsttdc  -characteristic dust temperature 
+c               dust temperatures behave like gas temperatures for
+c               different itdc but with dsttdc instead of tempdc 
+c       vtrbdc -microturbulence [km/s]
+c-------nebula (protoplanetary disk/nebula around central object)
+c              it is defined in cylindrical coordinates (r,z)
+c       inebl not=4  -nebula off
+c       inebl=4 flared protoplanetary disk
+c               vertical scale height is H(r)=(gamma*k*T_gas/m)**0.5
+c             vertical structure:
+c               fdens=dens0*dexp(-erz**2/hscale**2/2.d0)
+c               gas temperature may have temperature inversion
+c             radial structure:
+c               surface density decreases ~(r/rinnb)**edennb
+c               dust dens & electron num. dens are ~ density
+c               temperatures change with radius
+c       aneb    -vertical extension of nebula at particular r in [H]
+c               extension(r)=+-aneb* H(r)
+c       rinnb   -inner radius of the nebula [R_sol]
+c       routnb  -outer radius of the nebula [R_sol]
+c       emnb    -mass of the object in the nebula center [M_sol]
+c       rnb     -radius of the object in the ufo center [R_sol]
+c       hinvnb  start of vertical gas temp. inversion in [H]
+c               for z(r)>hinvnb*H(r) if itnb=3
+c       tinvnb  temperature multiplication factor in the inversion
+c	        gas temp(z,r)=temp0(r)*tinvnb
+c	hwindnb -vertical scale-height of the wind region
+c               rho(z)=rho(0)*dexp(-erz**2/hscale**2/2.d0)
+c               but for z>hwindnb*H
+c               rho(z)=rho(0)*dexp(-hwindnb**2/2.d0)
+c               i.e. rho(z)=rho(hwindnb*H)= const  
+c               electron n.d. and dust density are proportional to gas
+c               and thus will also have wind region
+c       idennb=1 reads file wind_prof with rho=f(z)
+c       xneb,yneb,zneb -components of the unit aiming vector of 
+c               the rotational axis of the Keplerian disc around emnb
+c       vxnb, vynb, vznb -net velocity components                 
+c               of the center of the nebula [km/s]
+c       tempnb  -characteristic gas temperature [K]
+c       itnb=1  nebula gas and dust temperatures are constant
+c       itnb=2  nebula gas and dust temp. are a function of r only
+c               T(r)=tempnb*(Rnb/r)**0.75*(1-(Rnb/r)**0.5)**0.25
+c               T(r)=dsttuf*(Rnb/r)**0.75*(1-(Rnb/r)**0.5)**0.25       
+c       itnb=3  disc temperature as a power law (e.g. protopl. discs)
+c               T(r)=tempnb*(r/rinnb)**etmpnb
+c               there may be a gas temperature inversion in z
+c       etmpnb  -exponent of radial temperature dependence
+c       densnb -gas density at rinnb (at midplane)
+c       anenb  -electron num. density at rinnb (at midplane)
+c       edennb -radial density dependence exponent of surface density
+c               (dens, ane and dust density are a function of r)
+c               Ne(r,z) ~ Rho_dust(r,z) ~ Rho_gas(r,z)
+c       dstdnb -dust density at rinnb [g/cm^3] (at midplane)
+c       dsttnb -characteristic dust temperature [K]
+c       vtrbuf -microturbulence [km/s]
+c-------flow
+c         it is identical to the stream but lower priority
+c       iflow=0/1  -stream off/on
+c       v1fw   -stream velocity at the beginnig of stream [km/s]
+c       v2fw   -stream velocity at the end of stream [km/s]
+c         velocity is directed from beginning to end 
+c       r1fw    -radius of the stream at the beginning [R_sol]
+c       r2fw    -radius of the stream at the end [R_sol]
+c         notice that although the radius changes the streamlines 
+c         are made paralel (contrary to jet) 
+c       x1fw,y1fw,z1fw -position of the beginning of the stream [R_sol]
+c       x2fw,y2fw,z2fw -position of the end of the stream [R_sol]
+c       vxfw, vyfw, vzfw -net velocity [km/s]
+c         you can use it also to mimic orbital drag or if the center
+c         of rotation is not at the center of coordinates
+c       xfw,yfw,zfw -rotational vector of stream
+c       pfw -rotational period of stream in days
+c       tempfw -temperature [K], constant along the stream 
+c       densfw - is density at the beginning and scales along the stream
+c         to satisfy the continuity equation: 
+c         density=densfw*v1fw*r1fw**2/(vfw*rfw**2)*exp(t/rsol*edenfw)
+c         where t is distance along the stream
+c       anefw - electron number density at the beginning, similar to 
+c         the density but if ielnd=1 then it is overriden by 
+c         the calculation from the state quantities
+c       edenfw -density dependence exponent to enable the modeling 
+c         of additional phenomena
+c       dstdfw -dust density [g/cm^3], it changes along the stream like 
+c         the gas density
+c       dsttfw -dust temperature [K], constant along the stream 
+c       vtrbfw -microturbulence velocity [km/s]
+c-------jet
+c       ijet=0   switch off the jet
+c       ijet=1  jet has only one -primary cone	
+c       ijet=2  jet has two cones: primary cone and opposite one
+c       ajet -angle halfwidth of the jet cones [deg]
+c         streamlines flare according to the opening angle
+c       rinjt, routjt -radius boundaries of the jet cones [R_sol]
+c       vjt  -radial (expanding) velocity of the jet [km/s]
+c       xjet,yjet,zjet -components of the unit aiming vector 
+c               of the primary jet cone
+c       vxjt, vyjt, vzjt -net velocity component [km/s] 
+c       tempjt -temperature [K], constant in the jet
+c       densjt -gas density [g/cm**3] at rinjt, it scales along the jet
+c         to satisfy the continuity equation
+c         density=densjt*rinjt**2/routjt**2
+c       anejt - electron number density [cm**-3] at rinjt. It changes
+c         along the jet like the gas density but if ielnd=1 then 
+c         it is overriden by the calculation from the state quantities
+c       dstdjt -dust density [g/cm**3] at rinjt, changes along the jet 
+c         like the gas density
+c       dsttjt -dust temperature [K], constant in the jet
+c       vtrbjt -microturbulence [km/s]
+c-------ufo 
+c         it is identical to DISK (same subroutine) but lower priority
+c       iufo=0 switch off the ufo		
+c       iufo=1 ufo has the shape of a rotating wedge
+c               limited by inner and outer radii (spherical surfaces)
+c       iufo=2 ufo has the shape of a slab
+c               limited by inner and outer radii (spherical surfaces)
+c       iufo=3 ufo has the shape of a rotating ellipsoid
+c               limited by inner spherical and outer ellipsoidal surface
+c       aufo -angular halfwidth of the ufo wedge [deg] 
+c              (if iufo=1)
+c             -half of the thickness of the ufo slab [R_sol] 
+c              (if iufo=2)
+c             -semiaxis of the ellipsiod along the rotational axis 
+c              [R_sol] (if iufo=3)
+c       rinuf -inner radius of the ufo [R_sol]
+c       routuf -outer radius of the ufo [R_sol] or
+c              -semiaxis of the ellipsoid perpendicular to the rotation 
+c               axis, if iufo=3, [R_sol]
+c       emuf -mass of the object in the ufo center [M_sol]
+c       ruf  -radius of the object in the ufo center [R_sol]
+c       xuf,yuf,zuf -location of the disk center in [R_sol]
+c       xufo,yufo,zufo -components of the unit aiming vector of 
+c               the rotational axis of the Keplerian disc around emuf
+c       vxuf, vyuf, vzuf -net velocity components                 
+c               of the center of the ufo [km/s]
+c       tempuf  -temperature [K]
+c       ituf=1  ufo gas and dust temperatures are constant
+c       ituf=2  ufo gas and dust temperatures are a function of r
+c               T(r)=tempuf*(Ruf/r)**0.75*(1-(Ruf/r)**0.5)**0.25
+c               T(r)=dsttuf*(Ruf/r)**0.75*(1-(Ruf/r)**0.5)**0.25       
+c       ituf=3  disc temperature as a power law (e.g. protopl. discs)
+c               T(r)=tempdc*(r/rindc)**etmpuf
+c       etmpuf  -exponent of radial temperature dependence
+c       densuf -gas density at rinuf 
+c       aneuf  -electron num. density at rinuf 
+c       edenuf -radial density dependence exponent 
+c               (dens, ane and dust density are a function of r)
+c               Rho(r) ~ Ne(r) ~ densuf*(r/rinuf)**edenuf
+c       dstduf -dust density at rinuf [g/cm^3] 
+c       dsttuf -dust temperature [K]
+c       vtrbuf -microturbulence [km/s]
+c-------shell
+c       ishell=0   switch off the shell
+c       ishell=1   velocity, dens, temp, ane are constant
+c       ishell=2   radial velocity is v(r)=vsh*(r/rinsh)**evelsh
+c           Ne(r)~Rho(r)=denssh*(rinsh/r)**2*vsh/v(r)), temp=const.
+c       ishell=3   radial velocity is v(r)=vsh*(1-rcsh/r)**evelsh
+c           Ne(r)~Rho(r)=denssh*(rinsh/r)**2*v(rinsh)/v(r)),temp=const.
+c       rinsh, routsh -inner, outer radius of the shell in [R_sol]     
+c       vsh -velocity of the uniformly expanding shell [km/s]           
+c       evelsh -exponent of velocity dependence
+c       rcsh - core/photospheric radius of the star in shell [R_sol]
+c       vxsh, vysh, vzsh -net velocity [km/s]
+c       tempsh -temperature [K]
+c       denssh -gas density at rinsh
+c       anesh -electron number density at rinsh
+c       dstdsh -dust density at rinsh [g/cm^3], 
+c         it changes as the gas density
+c       dsttsh -dust temperature [K]
+c       vtrbsh -microturbulence [km/s]
+c-------background
+c       v0 -constant uniformly expanding velocity of background [km/s]
+c       temp0 -temperature [K]
+c       dens0 -gas density [g/cm^3](note dust density is =0 in the code)
+c       ane0 -electron number density [cm^-3]
+c-----------------------------------------------------------------------                                                                       
+c       If the objects happen to overlap, priority is given by the order
+c       of 'if'-blocks in the subroutine smod1 and it is as follows:         
+c               star,companion,spot,stream,ring,disc,nebula,flow,
+c               jet,ufo,shell,and background.
+c       temp and ane are assumed to have reasonable values all along 
+c       the beam. An empty space can be defined as dens<denvac.         
+c       Four types of nontransparent objects can be defined as:         
+c       dcut1<dens<dcut2 -central star,                                 
+c       dcut2<dens<dcut3 -secondary star(=companion), 
+c       dcut3<dens<dcutn -3.body (it can be anything)
+c       dcutn<dens -any opaque dark matter.                              
+c       These objects are allowed to make eclipses along the line of     
+c       sight but cast no shadows into other directions (i.e. are       
+c       transparent when considering scattered light from               
+c       the central star).                                               
+c       Note that lunt1, lunt2, lunt3 are in fact associated with 
+c       density intervals (<dcut1,dcut2>, <dcut2,dcut3>, <dcut3,dcutn>) 
+c       rather then with objects (star,companion,...) and thus can be 
+c       used to ascribe the spectrum to any nontransparent object 
+c       setting its density within a particular density interval.
+c       However, limb darkening is applied to star and companion only
+c       and it must be switched off (dlst=dlcp=0.) if you want to use 
+c       these density intervals for other objects (without limb dark.).
+c       Roche geometry assumes synchronous rotation around z axis with 
+c       star in the center and companion at xcp>0,ycp=zcp=0 revolving 
+c       towards (0,1,0).
+c       Input variables which are supposed to be components of a unit 
+c       vector do not need to be normalized.
+        dcut1=0.5d15
+        dcut2=1.5d15
+        dcut3=2.5d15
+        dcutn=3.5d15
+        denvac=1.d-50

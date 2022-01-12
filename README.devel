@@ -1,0 +1,26 @@
+
+2DO Update shellspec (there is some minor error in nebula object,
+    which affects pole-on disks).
+
+2DO Template.in has an erroneous (multiple) rmdfx3, rdmfx4 keywords.
+
+--
+
+2DO: shadowing does NOT work correctly in Halpha
+     (it's optically thick at given lambda and
+     azimuthal direction; yet, the scattering is
+     always optically thin above given hshdnb)!
+
+2DO: SED synthetic spectra show NO H-alpha emission!
+     That's wrong sampling -> need to compute ~5 times
+     more data points and then CONVOLVE w. intrumental
+     profile of Burnasev! (see e.g. convolve.py)
+     Alternatively, use also SYN spectra and ignore
+     these chi^2 terms in Halpha. <- OK
+
+2DO: improve RTE in Shellspec again to avoid artefacts OK
+     (ideally, use BS integrator) <- NOT YET DONE
+
+--
+
+

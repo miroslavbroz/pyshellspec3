@@ -1,0 +1,13 @@
+
+The format of limcof_bp_* files:
+
+                 linear law (Eq. 1)  logarithmic (Eq. 3)  square-root (Eq. 4)
+No.  Teff  logg  x (Q)               x y (Q)              x y (Q)
+
+The original files can be found at ../xitau_simplex_chi2_PERIOD/ directory.
+
+--
+
+The grid was "extended" to 15000 K by simply copying lines
+from 14000 K (see *.diff).
+

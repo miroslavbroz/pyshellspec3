@@ -1,0 +1,6 @@
+#ntemp, number of different temperatures of the models
+1
+#temperatures [K], one per line
+30000
+#file names with spectra for each temperature, one per line
+pyterpol/starspec1.abs

@@ -1,0 +1,108 @@
+254c254
+< 	real(i8):: tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt
+---
+> 	real(i8):: tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt,asymjt
+260c260
+< 	real(i8):: tempsh,denssh,anesh,vtrbsh,dstdsh,dsttsh
+---
+> 	real(i8):: tempsh,denssh,anesh,vtrbsh,dstdsh,dsttsh,etmpsh
+1337c1337
+<         read(9,*)tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt
+---
+>         read(9,*)tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt,asymjt
+1359c1359
+< 	read(9,*)tempsh,denssh,anesh,vtrbsh,dstdsh,dsttsh
+---
+> 	read(9,*)tempsh,denssh,anesh,vtrbsh,dstdsh,dsttsh,etmpsh
+1924c1924
+<      &   ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt          &
+---
+>      &   ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt,asymjt   &
+1926a1927
+>      &   ,etmpsh                                                        &
+4359c4360
+<      &  ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt           &
+---
+>      &  ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt,asymjt    &
+4361a4363
+>      &  ,etmpsh                                                         &
+4425c4427
+<         real(i8):: tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt
+---
+>         real(i8):: tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt,asymjt
+4427a4430
+>         real(i8):: etmpsh
+4790,4794c4793,4798
+< !			inside the envelope
+<               call envelope(ienv,rosue(i,j),hen,xen,yen,zen             &
+<      &        ,vxen,vyen,vzen,omgen,inx                                 &
+<      &        ,tempen,dstden,dstten,densen,aneen,vtrben                 &
+<      &        ,far(i),fat(j),faz(k)                                     &
+---
+> !	      		in the jet 
+>               call sjet(ijet,ajet,rinjt,routjt                          &
+>      &        ,xjt,yjt,zjt,xjet,yjet,zjet                               &
+>      &        ,ivjt,vjt,eveljt,rcjt,vxjt,vyjt,vzjt,vtrbjt               &
+>      &        ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt,asymjt          &
+>      &        ,far(i),fat(j),faz(k),inx                                 &
+4798c4802
+< 	      if(inx.eq.1)goto 40
+---
+>               if(inx.eq.1)goto 40
+4822,4827c4826,4830
+< !	      		in the jet 
+<               call sjet(ijet,ajet,rinjt,routjt                          &
+<      &        ,xjt,yjt,zjt,xjet,yjet,zjet                               &
+<      &        ,ivjt,vjt,eveljt,rcjt,vxjt,vyjt,vzjt,vtrbjt               &
+<      &        ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt                 &
+<      &        ,far(i),fat(j),faz(k),inx                                 &
+---
+> !			inside the envelope
+>               call envelope(ienv,rosue(i,j),hen,xen,yen,zen             &
+>      &        ,vxen,vyen,vzen,omgen,inx                                 &
+>      &        ,tempen,dstden,dstten,densen,aneen,vtrben                 &
+>      &        ,far(i),fat(j),faz(k)                                     &
+4831c4834
+<               if(inx.eq.1)goto 40
+---
+> 	      if(inx.eq.1)goto 40
+4846c4849
+<      &        ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh                 &
+---
+>      &        ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh,etmpsh          &
+5630c5633
+<      &  ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt                       &
+---
+>      &  ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt,asymjt                &
+5642c5645
+< 	real(i8):: tempjt,densjt,anejt,etmpjt
+---
+> 	real(i8):: tempjt,densjt,anejt,etmpjt,asymjt
+5702a5706,5710
+>             if (dabs(angle-0.d0).lt.ajet) then
+>               fdens=fdens*(1.0d0+asymjt)
+>             else
+>               fdens=fdens*(1.0d0-asymjt)
+>             endif
+5716c5724
+<      &  ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh                       &
+---
+>      &  ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh,etmpsh                &
+5725c5733
+< 	real(i8):: tempsh,dstdsh,dsttsh,denssh,anesh,evelsh
+---
+> 	real(i8):: tempsh,dstdsh,dsttsh,denssh,anesh,evelsh,etmpsh
+5763c5771
+< 	  ftemp=tempsh
+---
+> 	  ftemp=tempsh*(er/rinsh)**etmpsh
+6889c6897,6898
+< 	  goto 120
+---
+>             call exit(1)
+> !           goto 120
+8748c8757
+< 	include 'pfdwor_inc.f90'
+\ No newline at end of file
+---
+> 	include 'pfdwor_inc.f90'
