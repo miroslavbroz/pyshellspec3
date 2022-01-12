@@ -7,10 +7,11 @@ import astropy.units as units
 import copy
 import numpy as np
 import re
-from pyshellspec.auxilliary import load_ascii
-from pyshellspec.definitions import filters, eff_wave, eff_band, calibration_flux
-from pyshellspec.definitions import location_definitions
-from pyshellspec.include.oifits import oifits
+
+from .auxilliary import load_ascii
+from .definitions import filters, eff_wave, eff_band, calibration_flux
+from .definitions import location_definitions
+from .include.oifits import oifits
 
 
 class Data:
@@ -295,7 +296,7 @@ class IFData(object):
         data = self.__verify_data(data, dtype)
 
         # transform into arrays
-        data = {k: np.array(data[k]) for k in data.keys()}
+        data = {k: np.array(data[k]) for k in list(data.keys())}
 
         return data
 
@@ -430,7 +431,7 @@ class IFData(object):
         # read out the data
         for line in lines[1:]:
             if not re.match("^#", line) and len(line) > 1:
-                temp = map(float, line.split())
+                temp = list(map(float, line.split()))
                 for i, k in enumerate(header):
                     if ((exclude_t3amp and (k == 't3amp' or k == 't3amperr'))
                         or (exclude_cp and (k == 't3phi' or k == 't3phierr'))):
@@ -533,7 +534,7 @@ class IFData(object):
             time = astropy.time.Time(obj[i].timeobs.isoformat(' '), format='iso', scale='utc')
             barcor = skypos.radial_velocity_correction(kind='barycentric', obstime=time, location=earloc)
 
-            print "time, barcor = ", time.jd, barcor  # dbg
+            print("time, barcor = ", time.jd, barcor)  # dbg
 
             tmp = barcor / astropy.constants.c
             for j in range(len(obj[i].eff_wave)):
@@ -549,7 +550,7 @@ class IFData(object):
         common_dtypes = ['hjd', 'ucoord', 'vcoord', 'u1coord', 'v1coord', 'u2coord', 'v2coord']
 
         # extract keys defining the data
-        keys = data.keys()
+        keys = list(data.keys())
 
         # set the reference data type
         if dtype == 'vis2':
@@ -589,12 +590,12 @@ class IFData(object):
             if isinstance(data[refdt][i], list):
                 ref_data_length = len(idx_not_flagged)
                 for k in common_dtypes:
-                    if k in data.keys():
+                    if k in list(data.keys()):
                         data[k][i] = [data[k][i] for rdl in range(ref_data_length)]
 
             # append data into output structure - where there is one
             # column for each data type
-            for k in output_data.keys():
+            for k in list(output_data.keys()):
                 output_data[k].extend(copy.deepcopy(data[k][i]))
 
         return output_data

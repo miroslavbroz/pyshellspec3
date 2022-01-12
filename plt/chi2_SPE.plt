@@ -12,21 +12,16 @@ set yl "F_{lambda} [] (shifted by dataset number)"
 #set xr [654:658]
 set yr [0:]
 set xtics 1.0
-set zeroaxis
-set errorbars small
-
-fac = 2.0
-
 set ytics 1.0
 set grid ytics
+set zeroaxis
+set errorbars small
 
 call "line2.plt" "Halpha" 6562.8
 call "line.plt" "+187 km" (6562.8*(1+187e3/3e8))
 call "line.plt" "-187"    (6562.8*(1-187e3/3e8))
 call "line.plt" "+41"     (6562.8*(1+41e3/3e8))
 call "line.plt" "-41"     (6562.8*(1-41e3/3e8))
-#call "line2.plt" "-80"   (6562.8*(1-80e3/3e8))
-call "line2.plt" "+374"   (6562.8*(1+374e3/3e8))
 call "line.plt" "Hbeta"  4861
 call "line.plt" "Hgamma" 4341
 call "line.plt" "Hdelta" 4102
@@ -54,13 +49,14 @@ call "line.plt" "+187 km" (6347*(1+187e3/3e8))
 call "line.plt" "SiII"   6371
 call "line.plt" "NeI"    6402
 
+fac = 2.0
+
 p \
   "<awk '{ print $2,$4,$7; print $2,$6,$7; print null; }' *.spe.syn.dat" u ($1/nm):($2+($3-1)*fac) t "residua"  w l lt 1 lw 3,\
   "<awk '($NF+0>100){ print $1,$2,$4,$6,$7; print $1,$2,$4,$6,$7; print null; }' *.spe.syn.dat" u ($2/nm):($4+($5-1)*fac) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
   "<awk '($7!=last){ print null; }{ print $0,ARGIND; last=$7; }' *.spe.syn.dat" u ($2/nm):($6+($7-1)*fac) t "synthetic" w lp lt 7 pt 1,\
   "<awk '($7!=last){ print null; }{ print $0,ARGIND; last=$7; }' *.spe.syn.dat" u ($2/nm):($4+($7-1)*fac):5 t "observed" w err lt 3 pt 1 ps 0.5,\
   "<awk '($7!=last){ print null; }{ print $0,ARGIND; last=$7; }' *.spe.syn.dat" u ($2/nm):($4+($7-1)*fac):5 not w lp  lt 3 pt 1 ps 0.5,\
-  "<awk '(FNR==2){ print $1,$2,$4,FILENAME; }' *.spe.syn.dat" u (660.):(($4-1)*fac):5 not w labels left font "Helvetica,8",\
   1.0 lt 0
 
 pa -1
@@ -69,5 +65,8 @@ set term png small size 1920,1080
 set out "chi2_SPE.png"
 rep
 
+q
+
+  "<awk '(FNR==2){ print $1,$2,$4,FILENAME; }' *.spe.syn.dat" u (660.):(($4-1)*fac):5 not w labels left font "Helvetica,8",\
 
 

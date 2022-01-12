@@ -49,7 +49,6 @@ p \
   "<awk '($7!=last){ print null; }{ print $0,ARGIND; last=$7; }' *.sed.syn.dat" u ($2/ang):($6+$7*fac) t "synthetic" w lp lt 7 pt 1,\
   "<awk '($7!=last){ print null; }{ print $0,ARGIND; last=$7; }' *.sed.syn.dat" u ($2/ang):($4+$7*fac):5 t "observed" w err lt 3 pt 1 ps 0.5,\
   "<awk '($7!=last){ print null; }{ print $0,ARGIND; last=$7; }' *.sed.syn.dat" u ($2/ang):($4+$7*fac):5 not w lp  lt 3 pt 1 ps 0.5,\
-  "<awk '(FNR==2){ print $1,$2,$4,FILENAME; }' *.sed.syn.dat" u (8000.):($4*360):5 not w labels left font "Helvetica,8"
 
 pa -1
 
@@ -58,4 +57,7 @@ set out "chi2_SED.png"
 rep
 
 
+q
+
+  "<awk '(FNR==2){ print $1,$2,$4,FILENAME; }' *.sed.syn.dat" u (8000.):($4*360):5 not w labels left font "Helvetica,8"
 

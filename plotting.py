@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+
 import numpy as np
 from matplotlib import pyplot as plt
-from pyshellspec.auxilliary import add_wing_phase
 
+from .auxilliary import add_wing_phase
 
 def plot_light_curve(outputname, obsphase, obsmag, error, synmag, whole_lc_phase, whole_lc_mag, passband=''):
     """

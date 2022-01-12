@@ -1,9 +1,4 @@
 
-2DO Update shellspec (there is some minor error in nebula object,
-    which affects pole-on disks).
-
-2DO Template.in has an erroneous (multiple) rmdfx3, rdmfx4 keywords.
-
 --
 
 2DO: shadowing does NOT work correctly in Halpha

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import copy
 import os
@@ -7,6 +7,7 @@ import nlopt
 import numpy as np
 import shutil
 import subprocess
+
 from astropy import units
 from matplotlib import pyplot as plt
 from multiprocessing import cpu_count
@@ -16,47 +17,47 @@ from scipy import ndimage
 from scipy.interpolate import interpn
 from scipy.interpolate import RectBivariateSpline
 from scipy.io import FortranFile
-from pyshellspec.auxilliary import DFT2d
-from pyshellspec.auxilliary import get_offset
-from pyshellspec.auxilliary import get_mulfac
-from pyshellspec.auxilliary import interpolate1d
-from pyshellspec.auxilliary import interpolate1d_hermite
-from pyshellspec.auxilliary import quad_phase
-from pyshellspec.auxilliary import write_file
-from pyshellspec.auxilliary import append_file
-from pyshellspec.auxilliary import rotateX
-from pyshellspec.auxilliary import rotateZ
-from pyshellspec.definitions import fitter_definitions
-from pyshellspec.definitions import filters, eff_wave, eff_band, calibration_flux
-from pyshellspec.definitions import shsp_template   as default_template
-from pyshellspec.definitions import shsp_executable as default_executable
-from pyshellspec.definitions import shsp_params     as default_params
-from pyshellspec.definitions import shsp_abundance  as default_abundance
-from pyshellspec.model import Model
-from pyshellspec.objects import CentralObject
-from pyshellspec.objects import Companion
-from pyshellspec.objects import Disk
-from pyshellspec.objects import Nebula
-from pyshellspec.objects import Distance
-from pyshellspec.objects import Envelope
-from pyshellspec.objects import Orbit
-from pyshellspec.objects import Spot
-from pyshellspec.objects import Ufo
-from pyshellspec.objects import Flow
-from pyshellspec.objects import Jet
-from pyshellspec.observations import Data
-from pyshellspec.plotting import plot_light_curve
-from pyshellspec.plotting import plot_squared_visibility
-from pyshellspec.plotting import plot_triple_product
+from .auxilliary import DFT2d
+from .auxilliary import get_offset
+from .auxilliary import get_mulfac
+from .auxilliary import interpolate1d
+from .auxilliary import interpolate1d_hermite
+from .auxilliary import quad_phase
+from .auxilliary import write_file
+from .auxilliary import append_file
+from .auxilliary import rotateX
+from .auxilliary import rotateZ
+from .definitions import fitter_definitions
+from .definitions import filters, eff_wave, eff_band, calibration_flux
+from .definitions import shsp_template   as default_template
+from .definitions import shsp_executable as default_executable
+from .definitions import shsp_params     as default_params
+from .definitions import shsp_abundance  as default_abundance
+from .model import Model
+from .objects import CentralObject
+from .objects import Companion
+from .objects import Disk
+from .objects import Nebula
+from .objects import Distance
+from .objects import Envelope
+from .objects import Orbit
+from .objects import Spot
+from .objects import Ufo
+from .objects import Flow
+from .objects import Jet
+from .observations import Data
+from .plotting import plot_light_curve
+from .plotting import plot_squared_visibility
+from .plotting import plot_triple_product
 
-import limcof
+from . import limcof
 
 class Interface(object):
     """
     This class should serve as an interface to the 
     Pyshellspec
     """
-    def __init__(self, data=None, model=None, image_size=None,  shellspec_abundance=None,
+    def __init__(self, data=None, model=None, image_size=None, shellspec_abundance=None,
                  shellspec_executable=None, shellspec_params=None, 
                  shellspec_template=None, debug=False, ncpu=1,
                  if_phase_precision=3, df_phase_precision=3, lc_phase_precision=2, sed_phase_precision=2, spe_phase_precision=2,
@@ -220,7 +221,7 @@ class Interface(object):
         # cpus in the computer
         ncpu = min([cpu_count(), ncpu])
         self.__ncpu = ncpu
-        print "ncpu = ", ncpu
+        print("ncpu = ", ncpu)
 
         # set debug mode
         self.debug = debug
@@ -446,9 +447,9 @@ class Interface(object):
 
         # axis of the image
         if newsize % 2 > 1:
-            xscale = np.arange(-newsize / 2 + 1, newsize / 2 + 1, 1) * step_angular
+            xscale = np.arange(-newsize // 2 + 1, newsize // 2 + 1, 1) * step_angular
         else:
-            xscale = np.arange(-newsize / 2, newsize / 2, 1) * step_angular
+            xscale = np.arange(-newsize // 2, newsize // 2, 1) * step_angular
         yscale = xscale.copy()
 
         if self.__ncpu > 1:
@@ -458,7 +459,7 @@ class Interface(object):
 
             # get the number of wavelengths
             newave = len(ifsyn['eff_wave'])
-            print "newave = " + str(newave)
+            print("newave = " + str(newave))
 
             # creates output files (different directory for each wavelength)
             directories = []
@@ -506,7 +507,7 @@ class Interface(object):
                     queues[j].close()
                     threads[j].join()
                     if threads[j].exitcode != 0:
-                        print "compute_if_DFT: Error running shellspec! exitcode = " + str(threads[j].exitcode)
+                        print("compute_if_DFT: Error running shellspec! exitcode = " + str(threads[j].exitcode))
                         sys.exit(1)
 
                 # compute DFT over the data
@@ -518,7 +519,7 @@ class Interface(object):
 
             # get the number of wavelengths
             newave = len(ifsyn['eff_wave'])
-            print "newave = " + str(newave)
+            print("newave = " + str(newave))
 
             # creates output files (different directory for each wavelength)
             directories = []
@@ -532,7 +533,7 @@ class Interface(object):
 
             # go over each wavelength
             for i in range(newave):
-                print "directory = ", directories[i]
+                print("directory = ", directories[i])
 
                 # set directory and phase
                 ew = ifsyn['eff_wave'][i] * units.m
@@ -742,7 +743,7 @@ class Interface(object):
 
         # get the number of wavelengths
         newave = len(lcsyn['eff_wave'])
-        print "newave = " + str(newave)
+        print("newave = " + str(newave))
 
         # creates output files
         directories = []
@@ -764,7 +765,7 @@ class Interface(object):
 
             # spawn processes
             nprocess = min([ncpu, newave - i])
-            print "nprocess = " + str(nprocess)
+            print("nprocess = " + str(nprocess))
 
             # effective wavelength and phase for one passband
             for j in range(nprocess):
@@ -792,7 +793,7 @@ class Interface(object):
                 queues[j].close()
                 threads[j].join()
                 if threads[j].exitcode != 0:
-                    print "compute_lc: Error running shellspec! exitcode = " + str(threads[j].exitcode)
+                    print("compute_lc: Error running shellspec! exitcode = " + str(threads[j].exitcode))
                     sys.exit(1)
 
             # append to the output structure
@@ -941,8 +942,8 @@ class Interface(object):
         fitparams = []
 
         # go over each object and parameter
-        for objname in self.__model.keys():
-            for parname in self.__model[objname].keys():
+        for objname in list(self.__model.keys()):
+            for parname in list(self.__model[objname].keys()):
                 if self.__model[objname].get_parameter(parname, 'fitted'):
                     # append the whole parameter
                     if attr is None:
@@ -1103,7 +1104,7 @@ class Interface(object):
 
         # we can either plot file by file
         if filename is not None:
-            print filename
+            print(filename)
             # first plot squared visibility
             if filename in self.__vis2_comparison['filename'] and observable in ['vis2', 'all']:
 
@@ -1250,7 +1251,7 @@ class Interface(object):
             opt.set_min_objective(obj_func)
 
             # set fitting criteria
-            for key in fit_kwargs.keys():
+            for key in list(fit_kwargs.keys()):
                 key = key.lower()
                 if key == 'xtol':
                     opt.set_xtol_rel(fit_kwargs[key])
@@ -1292,7 +1293,7 @@ class Interface(object):
         """
 
         # go over all objects
-        for objname in self.__model.keys():
+        for objname in list(self.__model.keys()):
 
             # resolved internal constraints within
             # each object
@@ -1306,7 +1307,7 @@ class Interface(object):
                 continue
 
             # go over each parameter
-            for parname in self.__model[objname].keys():
+            for parname in list(self.__model[objname].keys()):
 
                 # get is value
                 value = self.__model[objname][parname]
@@ -1323,14 +1324,14 @@ class Interface(object):
         :return:
         """
         # go over all objects
-        for objname in self.__model.keys():
-            if name.lower() in self.__model[objname].keys():
+        for objname in list(self.__model.keys()):
+            if name.lower() in list(self.__model[objname].keys()):
                 self.__model[objname].set_parameter(name, **kwargs)
                 return
 
         raise KeyError('The parameter %s does not belong to any'
                        ' defined objects. Defined objects are %s.' %
-                       (name, str(self.__model.keys())))
+                       (name, str(list(self.__model.keys()))))
     
     def get_parameter(self, name, **kwargs):
         """
@@ -1340,13 +1341,13 @@ class Interface(object):
         :return:
         """
         # go over all objects
-        for objname in self.__model.keys():
-            if name.lower() in self.__model[objname].keys():
+        for objname in list(self.__model.keys()):
+            if name.lower() in list(self.__model[objname].keys()):
                 return self.__model[objname].get_parameter(name, **kwargs)
 
         raise KeyError('The parameter %s does not belong to any'
                        ' defined objects. Defined objects are %s.' %
-                       (name, str(self.__model.keys())))
+                       (name, str(list(self.__model.keys()))))
     
     def set_wavelength(self, w0, wn, step):
         """
@@ -1444,12 +1445,11 @@ class Interface(object):
 
                 # group them into block
 #                block = [ds[key][ind] for key in keys]
-                print "filename = ", filename  # dbg
                 block = []
                 for key in keys:
-                    print "filename = ", filename  # dbg
-                    print "key = ", key  # dbg
-                    print "ind = ", ind  # dbg
+#                    print("filename = ", filename)  # dbg
+#                    print("key = ", key)  # dbg
+#                    print("ind = ", ind)  # dbg
                     block.append(ds[key][ind])
 
                 # substitute all None's by np.nan
@@ -1552,19 +1552,19 @@ class Interface(object):
         # odd number of pixels along x-axis
         if npx < newsize:
             if npx % 2 > 0:
-                padx = ((newsize - npx) / 2 + 1, (newsize - npx) / 2)
+                padx = ((newsize - npx) // 2 + 1, (newsize - npx) // 2)
             # even number
             else:
-                padx = ((newsize - npx) / 2, (newsize - npx) / 2)
+                padx = ((newsize - npx) // 2, (newsize - npx) // 2)
         else:
             padx = (0, 0)
         # the same y-axis for odd
         if npy < newsize:
             if npy % 2 > 0:
-                pady = ((newsize - npy) / 2 + 1, (newsize - npy) / 2)
+                pady = ((newsize - npy) // 2 + 1, (newsize - npy) // 2)
             # even
             else:
-                pady = ((newsize - npy) / 2, (newsize - npy) / 2)
+                pady = ((newsize - npy) // 2, (newsize - npy) // 2)
         else:
             pady = (0, 0)
 
@@ -2246,7 +2246,7 @@ class Interface(object):
                     continue
 
                 # append all data
-                for key in one_file.keys():
+                for key in list(one_file.keys()):
                     compdict[key] = np.append(compdict[key], one_file[key])
 
                 # data length
@@ -2317,8 +2317,17 @@ class Interface(object):
                     lcsyn['filename'][idx].append(filename)
 
                 # append all observational data
-                for key in one_file.keys():
-                    compdict[key] = np.append(compdict[key], one_file[key])
+                for key in list(one_file.keys()):
+                    value = one_file[key][0]
+                    if isinstance(value, units.Quantity):
+                        values = list(map(lambda x: x.value, one_file[key]))
+                    else:
+                        values = one_file[key]
+                    compdict[key] = np.append(compdict[key], values)
+#                    compdict[key] = np.append(compdict[key], one_file[key])  # problem w. astropy!
+#                    print("key = ", key)  # dbg
+#                    print("one_file = ", one_file[key])  # dbg
+#                    print("compdict = ", compdict[key])  # dbg
 
                 # data length
                 one_file_lenght = len(one_file['hjd'])
@@ -2379,7 +2388,7 @@ class Interface(object):
                     continue
 
                 # append all data
-                for key in one_file.keys():
+                for key in list(one_file.keys()):
                     compdict[key] = np.append(compdict[key], one_file[key])
 
                 # data length
@@ -2441,7 +2450,7 @@ class Interface(object):
                     continue
 
                 # append all data
-                for key in one_file.keys():
+                for key in list(one_file.keys()):
                     compdict[key] = np.append(compdict[key], one_file[key])
 
                 # data length
@@ -2498,7 +2507,7 @@ class Interface(object):
 
                 if one_file is None:
                     continue
-                for key in one_file.keys():
+                for key in list(one_file.keys()):
                     compdict[key] = np.append(compdict[key], one_file[key])
 
                 one_file_lenght = len(one_file['hjd'])
@@ -2525,11 +2534,11 @@ class Interface(object):
         """
 
         if self.dry_run == True:
-            print "Warning: This is a dry-run, no shellspec computation is performed!"
+            print("Warning: This is a dry-run, no shellspec computation is performed!")
             return 0
 
         if self.overwrite == False and os.path.exists('shellspec.out'):
-            print "Warning: shellspec.out already exists and overwrite is set to False!"
+            print("Warning: shellspec.out already exists and overwrite is set to False!")
             return 0
 
         # get the current working directory
@@ -2545,7 +2554,7 @@ class Interface(object):
         shutil.copy2(self.__shellspec_abundance_file, os.path.join(cwd, 'abundances'))
 
         # symlink files for synthetic spectra and line transfer
-        self.__symlink('../pyterpol', 'pyterpol')
+        self.__symlink('../pyterpol3', 'pyterpol3')
         self.__symlink('../starspec1', 'starspec1')
         self.__symlink('../starspec2', 'starspec2')
         self.__symlink('../line.dat', 'line.dat')
@@ -2729,8 +2738,8 @@ class Interface(object):
                 self.__model['nebula']['rnb'] = r
                 self.__model['nebula']['vynb'] = -K
 
-                K1 = self.__model['orbit'].get_semiamplitude('primary'); print "K1 = ", K1, " km/s"  # dbg
-                K2 = self.__model['orbit'].get_semiamplitude('secondary'); print "K2 = ", K2, " km/s"  # dbg
+                K1 = self.__model['orbit'].get_semiamplitude('primary'); print("K1 = ", K1, " km/s")  # dbg
+                K2 = self.__model['orbit'].get_semiamplitude('secondary'); print("K2 = ", K2, " km/s")  # dbg
 
             if self.__model.has_object('flow'):
                 sma = self.__model['orbit']['sma']
@@ -2740,11 +2749,11 @@ class Interface(object):
                 r0 = qq/(1.+qq)*sma
                 vyfw = (-r0*omega).to('km / s')
 
-                print "sma = ", sma  # dbg
-                print "qq = ", qq  # dbg
-                print "P = ", P  # dbg
-                print "r0 = ", r0  # dbg
-                print "vyfw = ", vyfw  # dbg
+                print("sma = ", sma)  # dbg
+                print("qq = ", qq)  # dbg
+                print("P = ", P)  # dbg
+                print("r0 = ", r0)  # dbg
+                print("vyfw = ", vyfw)  # dbg
 
                 self.__model['flow']['vxfw'] = 0.0
                 self.__model['flow']['vyfw'] = vyfw
@@ -2758,7 +2767,7 @@ class Interface(object):
         """
 
         # go over all model parameters
-        for objname in self.__model.keys():
+        for objname in list(self.__model.keys()):
             # orbit is a "speciual case"
             if objname == 'orbit':
                 for parname in ['dinc']:
@@ -2767,7 +2776,7 @@ class Interface(object):
                     dtype = self.__model[objname].get_parameter(parname, 'dtype')
                     self.__model[objname][parname] = dtype(value)
             else:
-                for parname in self.__model[objname].keys():
+                for parname in list(self.__model[objname].keys()):
 
                     # exception for two parameter of the spot, that are not in
                     # the shellspec.in
@@ -2784,9 +2793,9 @@ class Interface(object):
                     try:
                         self.__model[objname][parname] = dtype(value)
                     except TypeError as ex:
-                        print "objname = ", objname
-                        print "parname = ", parname
-                        print "value = ", value
+                        print("objname = ", objname)
+                        print("parname = ", parname)
+                        print("value = ", value)
                         raise ex
 
     def __str__(self):
@@ -2799,7 +2808,7 @@ class Interface(object):
         string += 'THE MODEL\n'
         string += '==================================================================================================\n'
         # append string of individual objects
-        for objname in self.__model.keys():
+        for objname in list(self.__model.keys()):
             string += str(self.__model[objname])
 
         return string
@@ -2823,7 +2832,7 @@ class Interface(object):
 
         ncpu = self.__ncpu
         newphase = len(sedsyn['phase'])
-        print "newphase = " + str(newphase)
+        print("newphase = " + str(newphase))
 
         directories = []
         for i in range(newphase):
@@ -2840,7 +2849,7 @@ class Interface(object):
             queues = []
             results = []
             nprocess = min([ncpu, newphase - i])
-            print "nprocess = " + str(nprocess)
+            print("nprocess = " + str(nprocess))
 
             for j in range(nprocess):
                 phase = sedsyn['phase'][i + j]
@@ -2860,7 +2869,7 @@ class Interface(object):
                 queues[j].close()
                 threads[j].join()
                 if threads[j].exitcode != 0:
-                    print "compute_sed: Error running shellspec! exitcode = " + str(threads[j].exitcode)
+                    print("compute_sed: Error running shellspec! exitcode = " + str(threads[j].exitcode))
                     sys.exit(1)
 
             for j in range(nprocess):

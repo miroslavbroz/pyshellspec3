@@ -2,7 +2,7 @@
 differential_evolution: The differential evolution global optimization algorithm
 Added by Andrew Nelson 2014
 """
-from __future__ import division, print_function, absolute_import
+
 import numpy as np
 from scipy.optimize import OptimizeResult, minimize
 from scipy.optimize.optimize import _status_message
@@ -424,7 +424,7 @@ class DifferentialEvolutionSolver(object):
         # Initialize population of candidate solutions by permutation of the
         # random samples.
         for j in range(self.parameter_count):
-            order = rng.permutation(range(self.num_population_members))
+            order = rng.permutation(list(range(self.num_population_members)))
             self.population[:, j] = samples[order, j]
 
         # reset population energies
@@ -637,7 +637,7 @@ class DifferentialEvolutionSolver(object):
 
         return self.x, self.population_energies[0]
 
-    def next(self):
+    def __next__(self):
         """
         Evolve the population by a single generation
 

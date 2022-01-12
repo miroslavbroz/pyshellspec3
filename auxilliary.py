@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+
 import numpy as np
 from astropy import units
 from scipy.interpolate import splrep
 from scipy.interpolate import splev
 from scipy.optimize import minimize_scalar
 
-import hermite
+from . import hermite
 
 def add_wing_phase(ph, data):
     """
@@ -132,7 +134,7 @@ def kepler_equation(M, ecc, tol=1e-6):
         E1[ind] = M[ind] + ecc * np.sin(E0[ind])
         ind = np.where(np.abs(E0 - E1) > tol)[0]
 
-        print E1
+        print(E1)
 
     return E1
 
@@ -155,7 +157,7 @@ def interpolate1d(xnew, x, y):
 
 def interpolate1d_hermite(xnew, x, y):
     ynew = np.zeros(len(xnew))
-    for i in xrange(0,len(xnew)):
+    for i in range(0,len(xnew)):
         ynew[i], ier = hermite.hermite(xnew[i], x, y)
     return ynew
 
@@ -185,7 +187,7 @@ def load_ascii(f, cols, delimiter=None, comment='#'):
             #print l  # dbg
             #print d
             #print [d[i] for i in colind]
-            d = map(float, [d[i] for i in colind])
+            d = list(map(float, [d[i] for i in colind]))
             block.append(d)
     
     return np.array(block)

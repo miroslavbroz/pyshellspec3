@@ -45,7 +45,7 @@ def main():
     infile = os.path.join(dir, 'lc.lis')
     names, pbands, errs = read_lc(infile)
     for i in range(0, len(names)):
-        print names[i]
+        print(names[i])
         obs.append(pyshellspec.LCData(filename=os.path.join(dir, names[i]),
                                       passband=pbands[i],
                                       global_error=errs[i],
@@ -56,7 +56,7 @@ def main():
     infile = os.path.join(dir, 'mirc.ascii.lis')
     names = read_if(infile)
     for i in range(0, len(names)):
-        print names[i]
+        print(names[i])
         obs.append(pyshellspec.IFData(filename=os.path.join(dir, names[i]),
                                       location='chara',
                                       ra=ra, dec=dec, 
@@ -67,7 +67,7 @@ def main():
     infile = os.path.join(dir, 'npoi.ascii.lis')
     names = read_if(infile)
     for i in range(0, len(names)):
-        print names[i]
+        print(names[i])
         obs.append(pyshellspec.IFData(filename=os.path.join(dir, names[i]),
                                       location='npoi',
                                       ra=ra, dec=dec,
@@ -80,7 +80,7 @@ def main():
     fnames = d[:, 0]
     names = d[:, 1]
     for i in range(0, len(names)):
-        print names[i]
+        print(names[i])
         obs.append(pyshellspec.IFData(filename=os.path.join(dir, fnames[i]),
                                       location='chara',
                                       ra=ra, dec=dec,
@@ -92,7 +92,7 @@ def main():
     infile = os.path.join(dir, 'icfits_HA_unique.ascii.lis')
     names = read_if(infile)
     for i in range(0, len(names)):
-        print names[i]
+        print(names[i])
         #obs.append(pyshellspec.DFData(filename=os.path.join(dir, names[i]), location='chara', ra=ra, dec=dec, format='fits'))
         obs.append(pyshellspec.DFData(filename=os.path.join(dir, names[i]), location='chara', ra=ra, dec=dec, format='ascii'))
 
@@ -261,7 +261,7 @@ def main():
     itf.write_template('final.in')
     itf.write_model()
 
-    print "Note: fit.py ended successfully."
+    print("Note: fit.py ended successfully.")
     sys.exit(0) 
 
     files = [] 

@@ -3,6 +3,10 @@ Changelog:
 
 --
 
+Modifications needed for Python3.
+
+--
+
 Apply slips to synthetic data, not observational data,
   so that we see always the same o. d.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import subprocess
@@ -22,16 +22,16 @@ def convolve(x, y, sigma=1.0, decim=1):
         s = 0.0
         norm = 0.0
         k = j
-        print "--"
-        print "i = ", i
-        print "j = ", j
+        print("--")
+        print("i = ", i)
+        print("j = ", j)
         while x[k]-x[i] < wd:
-            print "k = ", k
+            print("k = ", k)
             tmp = f_G(x[k]-x[i],0.0,sigma)
             s += y[k] * tmp
             norm += tmp
             k += 1
-        print "--"
+        print("--")
         xc.append(x[i])
         yc.append(s/norm)
         i += decim
@@ -49,12 +49,12 @@ def main():
     x1 = -5.0*sigma
     x2 = -x1
     dx = (x2-x1)/n
-    for i in xrange(0,n+1):
+    for i in range(0,n+1):
         x = x1+(x2-x1)*i/n
         tmp = f_G(x,0.0,sigma)
         s += tmp*dx
-        print "x = ", x, ", f_G = ", tmp
-    print "s = ", s
+        print("x = ", x, ", f_G = ", tmp)
+    print("s = ", s)
     sys.exit(0)
 
     data = np.loadtxt("shellspectrum", usecols=[0,3]).transpose()

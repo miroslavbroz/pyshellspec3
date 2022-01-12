@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import numpy as np
 
@@ -50,9 +50,9 @@ def main():
     xnew = np.linspace(0.0,2.0*np.pi,100)
     ynew = np.sin(xnew)
     yher = np.zeros(len(xnew))
-    for i in xrange(0,len(xnew)):
+    for i in range(0,len(xnew)):
         yher[i],ier = hermite(xnew[i],x,y)
-        print xnew[i],yher[i],ier
+        print(xnew[i],yher[i],ier)
     
     import matplotlib.pyplot as plt
 

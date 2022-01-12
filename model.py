@@ -1,6 +1,8 @@
-from pyshellspec.objects import Distance
-from pyshellspec.objects import Environmental
-from pyshellspec.objects import Grid
+#!/usr/bin/env python3
+
+from .objects import Distance
+from .objects import Environmental
+from .objects import Grid
 
 class Model:
     """
@@ -72,6 +74,6 @@ class Model:
         """
 
         string = ''
-        for objname in self.keys():
+        for objname in list(self.keys()):
             string += str(self[objname])
         return string

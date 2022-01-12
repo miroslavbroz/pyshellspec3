@@ -1,14 +1,17 @@
+#!/usr/bin/env python3
+
 import numpy as np
 from astropy import constants as cst
 from astropy import units
-from pyshellspec.auxilliary import filling_factor_to_rpoint
-from pyshellspec.auxilliary import l1_position
-from pyshellspec.auxilliary import potential_point
-from pyshellspec.auxilliary import polar_radius
-from pyshellspec.auxilliary import semiamplitude
-from pyshellspec.auxilliary import radial_velocity
-from pyshellspec.definitions import object_definitions
-from pyshellspec.parameter import Parameter
+
+from .auxilliary import filling_factor_to_rpoint
+from .auxilliary import l1_position
+from .auxilliary import potential_point
+from .auxilliary import polar_radius
+from .auxilliary import semiamplitude
+from .auxilliary import radial_velocity
+from .definitions import object_definitions
+from .parameter import Parameter
 
 
 class BaseObject(object):
@@ -26,7 +29,7 @@ class BaseObject(object):
         # if the name is within object_definitions, 
         # then the class attempts to define parameters 
         # from ''object_definitions''
-        if self.__name in object_definitions.keys() and len(parameters) == 0:
+        if self.__name in list(object_definitions.keys()) and len(parameters) == 0:
             for pdict in object_definitions[self.__name]:
                 self.__parameters.append(Parameter(**pdict))
                 
@@ -94,7 +97,7 @@ class BaseObject(object):
         # assign the parameters
         for i in range(0, len(self.__parameters)):
             if self.__parameters[i].get_property('name') == parname:
-                for attr in kwargs.keys():
+                for attr in list(kwargs.keys()):
                     self.__parameters[i].set_property(attr, kwargs[attr])
 
     def __getitem__(self, key):
@@ -132,7 +135,7 @@ class BaseObject(object):
         Sets parameters from an initial set of values.
         """
         
-        for k in kwargs.keys():
+        for k in list(kwargs.keys()):
             self.set_parameter(k, value=kwargs[k])
 
 
@@ -433,9 +436,9 @@ class Orbit(BaseObject):
         asini = self.get_parameter('asini')
         if asini > 0.0:
             self['sma'] = asini / np.sin(self.get_parameter('dinc').to('rad'))
-        print "asini = ", asini
-        print "sini = ", self.get_parameter('dinc')
-        print "sma = ", self.get_parameter('sma')
+        print("asini = ", asini)
+        print("sini = ", self.get_parameter('dinc'))
+        print("sma = ", self.get_parameter('sma'))
 
 class Spot(BaseObject):
     """
