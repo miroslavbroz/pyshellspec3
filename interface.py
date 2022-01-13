@@ -1958,7 +1958,7 @@ class Interface(object):
             # in case of debug mode, save both - the image and its Fourier transform
             if self.debug:
                 # the image
-                figname = '.'.join(['img', str(ew.to('Angstrom').value), str(phase[j]), 'png'])
+                figname = "img_%.2f_%.4f.png" % (ew.to('Angstrom').value, phase[j])
                 plt.imshow(img, cmap='gray')
                 plt.savefig(figname)
                 plt.close()

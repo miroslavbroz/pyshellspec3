@@ -238,8 +238,8 @@ object_definitions = {
         dict(name='q', value=0.2230, unit=None, vmin=0., vmax=1000., fitted=False, dtype=float, docstring=''),
         dict(name='ecc', value=0.0, unit=None, vmin=0., vmax=1., fitted=False, dtype=float, docstring=''),
         dict(name='dinc', value=88.0, unit='deg', vmin=0., vmax=180., fitted=False, dtype=float, docstring=''),
-        dict(name='omega', value=90., unit='deg', vmin=0., vmax=360., fitted=False, dtype=float, docstring=''),
-        dict(name='omega_an', value=254., unit='deg', vmin=0., vmax=360., fitted=False, dtype=float, docstring=''),
+        dict(name='omega', value=90., unit='deg', vmin=-360., vmax=360., fitted=False, dtype=float, docstring=''),
+        dict(name='omega_an', value=254., unit='deg', vmin=-360., vmax=360., fitted=False, dtype=float, docstring=''),
         dict(name='asini', value=58.19, unit='solRad', vmin=0., vmax=100000., fitted=False, dtype=float, docstring=''),
         ],
     'central_object': [
