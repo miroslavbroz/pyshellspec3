@@ -1962,6 +1962,8 @@ class Interface(object):
                 plt.imshow(img, cmap='gray')
                 plt.savefig(figname)
                 plt.close()
+                figname = "img_%.2f_%.4f.dat" % (ew.to('Angstrom').value, phase[j])
+                np.savetxt(figname, img)
 
             images.append(img)
 
