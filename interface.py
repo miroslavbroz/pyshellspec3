@@ -1545,9 +1545,6 @@ class Interface(object):
         incl = incl.to('rad').value
         omega = omega.to('deg').value
 
-        order=0  # nearest-neighbor
-        order=3  # cubic spline
-        order=1  # linear
         # shift the centre of the image into barycentre
         # if its position is nonzero
         if bar_pos > 0.:
@@ -1590,7 +1587,7 @@ class Interface(object):
         img = np.lib.pad(img, (padx, pady), 'constant', constant_values=(0.0,0.0))
 
         # shift the image so the barycentre is in the exact centre, i.e. between zero pixels
-        # use up-scaling (by 2) to prevent blurring, i.e. fake limb darkening!
+        # use up-scaling (by 2) and nearest-neighbor (0) to prevent blurring, i.e. fake limb darkening!
         # img = ndimage.shift(img, (-0.5, -0.5), order=order)
         img = ndimage.zoom(img, 2, order=0)
         img = ndimage.shift(img, (-1, -1), order=order)
@@ -1599,7 +1596,7 @@ class Interface(object):
         img = ndimage.rotate(img, omega, order=order, reshape=False)
 
         # move the barycentre back to the centre of the pixel newsize // 2 in both axes
-        # use down-scaling; 0 .. nearest-neighbor
+        # use down-scaling; we prefer linear (1) here due to ~45 deg angles 
         # img = ndimage.shift(img, (0.5, 0.5), order=order)
         img = ndimage.shift(img, (1, 1), order=order)
         img = ndimage.zoom(img, 0.5, order=order)
