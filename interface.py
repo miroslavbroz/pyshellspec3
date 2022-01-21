@@ -1518,19 +1518,36 @@ class Interface(object):
 
         return vis
 
-    def __FT_one_image(self, img, npx, npy, phys_res, bar_pos, phase, incl, omega, newsize, image_only=False):
+    def __FT_one_image(self, img, npx, npy, phys_res, bar_pos, phase, incl, omega, newsize, image_only=False, order=1):
         """
         Computes Fast Fourier Transform of one image.
-        :return:
+        :param img: Original image
+        :param npx:
+        :param npy:
+        :param phys_res:
+        :param bar_pos:
+        :param phase:
+        :param incl:
+        :param omega:
+        :param newsize:
+        :param image_only: 
+        :param order: Interpolation order, 0 .. nearest-neighbor, 1 .. linear, 3 .. cubic spline.
+        :return: img: Synthetic image.
+        :return: fftimg: Fourier Transform.
+
+        Note: Beware of artefacts if order=3!
         """
         # first reformat the image --- 1 column -> 2d array
-        # print npx, npy, npx * npy, newsize
+        #print("__FT_one_image: npx = ", npx, " npy = ", npy, " newsize = ", newsize)  # dbg
         img = img.reshape((npx, npy))
 
         # get omega in degrees and inclination in radians
         incl = incl.to('rad').value
         omega = omega.to('deg').value
 
+        order=0  # nearest-neighbor
+        order=3  # cubic spline
+        order=1  # linear
         # shift the centre of the image into barycentre
         # if its position is nonzero
         if bar_pos > 0.:
@@ -1544,9 +1561,10 @@ class Interface(object):
             # position of the barycentre in the rotated frame
             xc, yc, zc = rotateZ(bar_pos_pix, 0., 0., -angle)
             xcc, ycc, zcc = rotateX(xc, yc, zc, -incl)
+            print("__FT_one_image: xcc = ", xcc, " ycc = ", ycc, " bar_pos_pix = ", bar_pos_pix)  # dbg
 
             # move the centre of the image into barycentre
-            img = ndimage.shift(img, (-xcc, -ycc), order=3)
+            img = ndimage.shift(img, (-xcc, -ycc), order=order)
 
         # pad the image with zeros to transform it into square
         # odd number of pixels along x-axis
@@ -1571,16 +1589,20 @@ class Interface(object):
         # pad the image with zeros
         img = np.lib.pad(img, (padx, pady), 'constant', constant_values=(0.0,0.0))
 
-        # shift the image so the barycentre is in the exact centre
-        # i.e. between zero pixels
-        img = ndimage.shift(img, (-0.5, -0.5), order=3)
+        # shift the image so the barycentre is in the exact centre, i.e. between zero pixels
+        # use up-scaling (by 2) to prevent blurring, i.e. fake limb darkening!
+        # img = ndimage.shift(img, (-0.5, -0.5), order=order)
+        img = ndimage.zoom(img, 2, order=0)
+        img = ndimage.shift(img, (-1, -1), order=order)
 
         # rotate the image according to the ascending node
-        img = ndimage.rotate(img, omega, order=3, reshape=False)
+        img = ndimage.rotate(img, omega, order=order, reshape=False)
 
-        # move the barycentre back to the centre of the
-        # pixel newsize / 2 in both axes
-        img = ndimage.shift(img, (0.5, 0.5), order=3)
+        # move the barycentre back to the centre of the pixel newsize // 2 in both axes
+        # use down-scaling; 0 .. nearest-neighbor
+        # img = ndimage.shift(img, (0.5, 0.5), order=order)
+        img = ndimage.shift(img, (1, 1), order=order)
+        img = ndimage.zoom(img, 0.5, order=order)
 
         # if we want only prepared image --- for DFT for example
         if image_only:
@@ -1875,14 +1897,14 @@ class Interface(object):
                 m_band = -2.5 * np.log10(F_band/(calibration_flux[idx] * eff_band[idx]))
 
 #                if band == 'johnson_v':
-#                    print "band = " + str(band)
-#                    print "m_lambda = " + str(m_lambda[0])
-#                    print "F_lambda = " + str(F_lambda[0])
-#                    print "idx = " + str(idx)
-#                    print "eff_band = " + str(eff_band[idx])
-#                    print "calibration_flux = " + str(calibration_flux[idx])
-#                    print "F_band = " + str(F_band[0])
-#                    print "m_band = " + str(m_band[0])
+#                    print("band = " + str(band))
+#                    print("m_lambda = " + str(m_lambda[0]))
+#                    print("F_lambda = " + str(F_lambda[0]))
+#                    print("idx = " + str(idx))
+#                    print("eff_band = " + str(eff_band[idx]))
+#                    print("calibration_flux = " + str(calibration_flux[idx]))
+#                    print("F_band = " + str(F_band[0]))
+#                    print("m_band = " + str(m_band[0]))
 #                    sys.exit(1)
 
                 # compute additonal offset
@@ -2556,7 +2578,7 @@ class Interface(object):
         shutil.copy2(self.__shellspec_abundance_file, os.path.join(cwd, 'abundances'))
 
         # symlink files for synthetic spectra and line transfer
-        self.__symlink('../pyterpol3', 'pyterpol3')
+        self.__symlink('../pyterpoldata', 'pyterpoldata')
         self.__symlink('../starspec1', 'starspec1')
         self.__symlink('../starspec2', 'starspec2')
         self.__symlink('../line.dat', 'line.dat')

@@ -15,8 +15,8 @@
 !               stellar spectra, gas opacities
 !	npfang -number of angles for the Mie scattering phase function
 !
-        integer, parameter:: ndimf1=401,ndimf2=401,ndimf3=401
-        integer, parameter:: ndim1=401,ndim2=401,ndim3=401,ndim=ndim3
+        integer, parameter:: ndimf1=501,ndimf2=501,ndimf3=501
+        integer, parameter:: ndim1=501,ndim2=501,ndim3=501,ndim=ndim3
         integer, parameter:: mion=9,matom=99,mfreq=1001,mline=10
-	integer, parameter:: mphase=200
+	integer, parameter:: mphase=251
         integer, parameter:: mstarx=500000,mspecx=36,npfang=65

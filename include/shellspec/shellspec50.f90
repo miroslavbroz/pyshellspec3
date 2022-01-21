@@ -1495,6 +1495,11 @@
 15	  read(15,*,err=17,end=17)alpha(i)
 	  alpha(i)=(alpha(i)-0.25d0)*2.d0*pi
 	  i=i+1
+          if (i-1.gt.mphase) then
+	    write(*,*)' error: number of phases .gt. mphase = ', mphase
+	    write(3,*)' 1 error: number of phases .gt. mphase = ', mphase
+            call exit(1)
+          endif
 	  goto 15
 17	  nphase=i-1
 	  close(15)
