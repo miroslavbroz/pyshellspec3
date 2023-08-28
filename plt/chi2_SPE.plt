@@ -3,6 +3,8 @@
 nm = 1.e-9
 ang = 1.e-10/nm
 
+fac = 2.0
+
 set colors classic
 set term x11
 
@@ -48,8 +50,6 @@ call "line.plt" "-187 km" (6347*(1-187e3/3e8))
 call "line.plt" "+187 km" (6347*(1+187e3/3e8))
 call "line.plt" "SiII"   6371
 call "line.plt" "NeI"    6402
-
-fac = 2.0
 
 p \
   "<awk '{ print $2,$4,$7; print $2,$6,$7; print null; }' *.spe.syn.dat" u ($1/nm):($2+($3-1)*fac) t "residua"  w l lt 1 lw 3,\

@@ -2698,12 +2698,19 @@ class Interface(object):
             return
         else:
             self.__model['orbit'].resolve_constraints()  # added by MB, Nov 27th 2018
+
+            K1 = self.__model['orbit'].get_semiamplitude('primary'); print("K1 = ", K1, " km/s")  # dbg
+            K2 = self.__model['orbit'].get_semiamplitude('secondary'); print("K2 = ", K2, " km/s")  # dbg
+
             if self.__model.has_object('central_object'):
                 # from orbit get mass
                 m = self.__model['orbit'].get_mass('primary').to('solMass')
 
                 # assign it to central object
                 self.__model['central_object']['emstar'] = m.value
+
+                K1 = self.__model['orbit'].get_semiamplitude('primary')
+                self.__model['central_object']['vyst'] = -K1
 
                 # if istar = 2, update radius from filling factor
                 if self.__model['central_object']['istar'] == 2:
@@ -2719,6 +2726,9 @@ class Interface(object):
                 # assign it to companion
                 self.__model['companion']['qq'] = q
                 self.__model['companion']['xcp'] = sma
+
+                K2 = self.__model['orbit'].get_semiamplitude('secondary')
+                self.__model['companion']['vycp'] = -K2
 
                 # if icomp = 2, update radius from filling factor
                 if self.__model['companion']['icomp'] == 2:
@@ -2741,26 +2751,23 @@ class Interface(object):
                 # get mass and radius of the central object
                 m = self.__model['orbit'].get_mass('primary').to('solMass').value
                 r = self.__model['central_object']['rstar'].to('solRad').value
-                K = self.__model['orbit'].get_semiamplitude('primary')
+                K1 = self.__model['orbit'].get_semiamplitude('primary')
 
                 # assign it to disk
                 self.__model['disk']['emdc'] = m
                 self.__model['disk']['rdc'] = r
-                self.__model['disk']['vydc'] = K
+                self.__model['disk']['vydc'] = -K1
 
             if self.__model.has_object('nebula'):
                 # get mass, radius and RV of the central object
                 m = self.__model['orbit'].get_mass('primary').to('solMass').value
                 r = self.__model['central_object']['rstar'].to('solRad').value
-                K = self.__model['orbit'].get_semiamplitude('primary')
+                K1 = self.__model['orbit'].get_semiamplitude('primary')
 
                 # assign it to nebula
                 self.__model['nebula']['emnb'] = m
                 self.__model['nebula']['rnb'] = r
-                self.__model['nebula']['vynb'] = -K
-
-                K1 = self.__model['orbit'].get_semiamplitude('primary'); print("K1 = ", K1, " km/s")  # dbg
-                K2 = self.__model['orbit'].get_semiamplitude('secondary'); print("K2 = ", K2, " km/s")  # dbg
+                self.__model['nebula']['vynb'] = -K1
 
             if self.__model.has_object('flow'):
                 sma = self.__model['orbit']['sma']
