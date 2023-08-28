@@ -40,6 +40,7 @@ c find closest Z
 
 c find closest log g
 c (assuming a complete grid in Z vs log g)
+      j = 1
       do while ((logg_avail(j).lt.logg).and.(j.lt.n_avail))
         j = j+1
       enddo
@@ -63,10 +64,10 @@ c (NOT assuming a complete grid, only sorted one)
       k = 1
       do i = 1,2
         do j = 1,2
-          do while (Z_avail(k).ne.Z_(i))
+          do while ((Z_avail(k).ne.Z_(i)).and.(k.lt.n_avail))
             k = k+1
           enddo
-          do while (logg_avail(k).ne.logg_(i,j))
+          do while ((logg_avail(k).ne.logg_(i,j)).and.(k.lt.n_avail))
             k = k+1
           enddo
           do while ((Teff_avail(k).lt.Teff).and.(k.lt.n_avail))
