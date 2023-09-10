@@ -14,25 +14,31 @@
 < 	read(9,*)tempsh,denssh,anesh,vtrbsh,dstdsh,dsttsh
 ---
 > 	read(9,*)tempsh,denssh,anesh,vtrbsh,dstdsh,dsttsh,etmpsh
-1924c1924
+1497a1498,1502
+>           if (i-1.gt.mphase) then
+> 	    write(*,*)' error: number of phases .gt. mphase = ', mphase
+> 	    write(3,*)' 1 error: number of phases .gt. mphase = ', mphase
+>             call exit(1)
+>           endif
+1924c1929
 <      &   ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt          &
 ---
 >      &   ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt,asymjt   &
-1926a1927
+1926a1932
 >      &   ,etmpsh                                                        &
-4359c4360
+4359c4365
 <      &  ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt           &
 ---
 >      &  ,tempjt,densjt,anejt,vtrbjt,ijet,dstdjt,dsttjt,etmpjt,asymjt    &
-4361a4363
+4361a4368
 >      &  ,etmpsh                                                         &
-4425c4427
+4425c4432
 <         real(i8):: tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt
 ---
 >         real(i8):: tempjt,densjt,anejt,vtrbjt,dstdjt,dsttjt,etmpjt,asymjt
-4427a4430
+4427a4435
 >         real(i8):: etmpsh
-4790,4794c4793,4798
+4790,4794c4798,4803
 < !			inside the envelope
 <               call envelope(ienv,rosue(i,j),hen,xen,yen,zen             &
 <      &        ,vxen,vyen,vzen,omgen,inx                                 &
@@ -45,11 +51,11 @@
 >      &        ,ivjt,vjt,eveljt,rcjt,vxjt,vyjt,vzjt,vtrbjt               &
 >      &        ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt,asymjt          &
 >      &        ,far(i),fat(j),faz(k),inx                                 &
-4798c4802
+4798c4807
 < 	      if(inx.eq.1)goto 40
 ---
 >               if(inx.eq.1)goto 40
-4822,4827c4826,4830
+4822,4827c4831,4835
 < !	      		in the jet 
 <               call sjet(ijet,ajet,rinjt,routjt                          &
 <      &        ,xjt,yjt,zjt,xjet,yjet,zjet                               &
@@ -62,46 +68,46 @@
 >      &        ,vxen,vyen,vzen,omgen,inx                                 &
 >      &        ,tempen,dstden,dstten,densen,aneen,vtrben                 &
 >      &        ,far(i),fat(j),faz(k)                                     &
-4831c4834
+4831c4839
 <               if(inx.eq.1)goto 40
 ---
 > 	      if(inx.eq.1)goto 40
-4846c4849
+4846c4854
 <      &        ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh                 &
 ---
 >      &        ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh,etmpsh          &
-5630c5633
+5630c5638
 <      &  ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt                       &
 ---
 >      &  ,tempjt,densjt,anejt,dstdjt,dsttjt,etmpjt,asymjt                &
-5642c5645
+5642c5650
 < 	real(i8):: tempjt,densjt,anejt,etmpjt
 ---
 > 	real(i8):: tempjt,densjt,anejt,etmpjt,asymjt
-5702a5706,5710
+5702a5711,5715
 >             if (dabs(angle-0.d0).lt.ajet) then
 >               fdens=fdens*(1.0d0+asymjt)
 >             else
 >               fdens=fdens*(1.0d0-asymjt)
 >             endif
-5716c5724
+5716c5729
 <      &  ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh                       &
 ---
 >      &  ,tempsh,dstdsh,dsttsh,denssh,anesh,evelsh,etmpsh                &
-5725c5733
+5725c5738
 < 	real(i8):: tempsh,dstdsh,dsttsh,denssh,anesh,evelsh
 ---
 > 	real(i8):: tempsh,dstdsh,dsttsh,denssh,anesh,evelsh,etmpsh
-5763c5771
+5763c5776
 < 	  ftemp=tempsh
 ---
 > 	  ftemp=tempsh*(er/rinsh)**etmpsh
-6889c6897,6898
+6889c6902,6903
 < 	  goto 120
 ---
 >             call exit(1)
 > !           goto 120
-8748c8757
+8748c8762
 < 	include 'pfdwor_inc.f90'
 \ No newline at end of file
 ---

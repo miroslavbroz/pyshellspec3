@@ -14,7 +14,7 @@ set yl "F_{lambda} [] (shifted by dataset number)"
 #set xr [654:658]
 set yr [0:]
 set xtics 1.0
-set ytics 1.0
+set ytics 0.5
 set grid ytics
 set zeroaxis
 set errorbars small

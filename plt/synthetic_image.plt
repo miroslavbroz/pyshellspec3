@@ -7,14 +7,14 @@ set xl "x [R_S]"
 set yl "y [R_S]"
 set cbl "I_{nu} [erg cm^{-2} s^{-1} Hz^{-1} sr^{-1}]" offset 1,0
 
-set cbr [0:]
+set cbr [:]
+set logscale cb
 
 set pm3d map
 set size ratio -1
 set nokey
 set zeroaxis
 #set palette gray
-set cbr [-0.0005:]
 
 splot "tempspe00/2Dimage_001" u ($1*cm/R_S):($2*cm/R_S):3
 

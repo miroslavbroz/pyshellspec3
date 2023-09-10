@@ -500,8 +500,7 @@ class Interface(object):
                 for j in range(len(threads)):
                     threads[j].start()
 
-                # readout processes and
-                # join threads
+                # readout processes and join threads
                 for j in range(len(threads)):
                     results.append(queues[j].get())
                     queues[j].close()
@@ -662,7 +661,7 @@ class Interface(object):
         fv_img = fu_img.copy()
 
         # set directory
-        directory = os.path.join(os.getcwd(), 'tempif')
+        directory = os.path.join(os.getcwd(), 'tempfft')
         if not os.path.isdir(directory):
             os.mkdir(directory)
 
@@ -691,7 +690,7 @@ class Interface(object):
             for j in range(0, len(phase)):
 
                 # set the filename
-                filename = os.path.join(cwd, '2Dimage_%03d' % (j + 1))
+                filename = os.path.join(directory, '2Dimage_%03d' % (j + 1))
 
                 # read the image
                 img = self.__read_image(filename)
@@ -702,21 +701,33 @@ class Interface(object):
                 # in case of debug mode, save both - the image and its Fourier transform
                 if self.debug:
                     # the image
-                    figname = '.'.join(['img', str(ew.to('Angstrom').value), str(phase[j]), 'png'])
-                    plt.imshow(self.debug_image, cmap='gray')
+                    tmp = '%.2f' % (ew.to('Angstrom').value)
+                    figname = '.'.join(['fftimg', tmp, str(phase[j]), 'png'])
+                    plt.imshow(self.debug_image, cmap='plasma')
+                    plt.xlabel('x [pxl]')
+                    plt.ylabel('y [pxl]')
+                    plt.colorbar()
+                    plt.tight_layout()
                     plt.savefig(figname)
                     plt.close()
 
                     # and its Fourier transform
-                    figname = '.'.join(['fftimg', str(ew.to('Angstrom').value), str(phase[j]), 'png'])
-                    plt.imshow(np.abs(fftimg), cmap='gray')
+                    figname = '.'.join(['fftabs', tmp, str(phase[j]), 'png'])
+                    plt.imshow(np.abs(fftimg), cmap='plasma')
+                    plt.xlabel('u [pxl]')
+                    plt.ylabel('v [pxl]')
+                    plt.colorbar()
+                    plt.tight_layout()
                     plt.savefig(figname)
                     plt.close()
 
-                    figname = '.'.join(['angimg', str(ew.to('Angstrom').value), str(phase[j]), 'png'])
-                    plt.imshow(np.angle(fftimg, deg=True), cmap='gray')
-                    plt.savefig(figname)
+                    figname = '.'.join(['fftang', tmp, str(phase[j]), 'png'])
+                    plt.imshow(np.angle(fftimg, deg=True), cmap='plasma')
+                    plt.xlabel('u [pxl]')
+                    plt.ylabel('v [pxl]')
                     plt.colorbar()
+                    plt.tight_layout()
+                    plt.savefig(figname)
                     plt.close()
 
                 # compute observables
@@ -1979,6 +1990,10 @@ class Interface(object):
                 # the image
                 figname = "img_%.2f_%.4f.png" % (ew.to('Angstrom').value, phase[j])
                 plt.imshow(img, cmap='gray')
+                plt.xlabel('x [pxl]')
+                plt.ylabel('y [pxl]')
+                plt.colorbar()
+                plt.tight_layout()
                 plt.savefig(figname)
                 plt.close()
                 figname = "img_%.2f_%.4f.dat" % (ew.to('Angstrom').value, phase[j])
@@ -2090,7 +2105,7 @@ class Interface(object):
             # in case of debug mode, save both - the image and its Fourier transform
             if self.debug:
                 # the image
-                figname = '.'.join(['img', str(ew.to('Angstrom').value), str(phase[j]), 'png'])
+                figname = '.'.join(['img', '%.2f' % (ew.to('Angstrom').value), str(phase[j]), 'png'])
                 plt.imshow(img, cmap='gray')
                 plt.savefig(figname)
                 plt.close()
