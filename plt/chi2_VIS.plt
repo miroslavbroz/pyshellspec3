@@ -8,7 +8,7 @@ rad = 180./pi
 set xl "B/lambda [cycles]"
 set yl "squared visbility V^2 [] (shifted by dataset number)"
 
-set yr [-0.5:1.5]
+set yr [-0.5:2.5]
 set ytics 1
 set grid ytics
 set zeroaxis

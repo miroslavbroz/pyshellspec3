@@ -568,7 +568,6 @@ class Interface(object):
         and shift phase arg V to match the observed values.
         """
         
-#        print "self.__vis_comparison = ", self.__vis_comparison['filename']  # dbg
         filenames = self.__vis_comparison['filename']
         for filename in np.unique(filenames):
             find = np.where(filenames == filename)[0]
@@ -729,6 +728,9 @@ class Interface(object):
                     plt.tight_layout()
                     plt.savefig(figname)
                     plt.close()
+
+                # transpose AFTER debugging and BEFORE observables! otherwise, it's misleading...
+                fftimg = fftimg.T
 
                 # compute observables
                 self.__get_if_observables_FFT(fftimg, ew.value, phase[j], fu_img, fv_img, self.__if_ew_precision, self.__if_phase_precision)
@@ -1057,8 +1059,7 @@ class Interface(object):
         img = self.__read_image(filename)
 
         # here it only rotates the image and returns it
-        img = self.__FT_one_image(img, npx, npy, phys_res, bar_pos,
-                                  phase, incl, omega, newsize, image_only=True)
+        img = self.__FT_one_image(img, npx, npy, phys_res, bar_pos, phase, incl, omega, newsize, image_only=True)
 
         if img_only:
             return img, xscale
@@ -1368,8 +1369,6 @@ class Interface(object):
         :param wn:
         :param step:
         """
-        #print w0, wn, step  # dbg
-        
         # if astropy quatities are pass they 
         # are transformed to angstrom
         if isinstance(w0, units.Quantity):
@@ -1455,7 +1454,6 @@ class Interface(object):
                 ind = np.where(ds['filename'] == filename)[0]
 
                 # group them into block
-#                block = [ds[key][ind] for key in keys]
                 block = []
                 for key in keys:
 #                    print("filename = ", filename)  # dbg
@@ -1549,7 +1547,6 @@ class Interface(object):
         Note: Beware of artefacts if order=3!
         """
         # first reformat the image --- 1 column -> 2d array
-        #print("__FT_one_image: npx = ", npx, " npy = ", npy, " newsize = ", newsize)  # dbg
         img = img.reshape((npx, npy))
 
         # get omega in degrees and inclination in radians
@@ -1616,16 +1613,15 @@ class Interface(object):
         if image_only:
             return img / img.sum()
 
-        # transpose the image
-        img = img.T
+        # do NOT transpose the image here; otherwise it's misleading...
+        #img = img.T
 
-        # store the image for consequent plotting
-        # in case of debugging
+        # store the image for consequent plotting/debugging
         if self.debug:
-            self.debug_image = img.T
+            self.debug_image = img
 
         # compute the normalized Fourier transform
-        fftimg = np.fft.fftshift(np.fft.fft2(np.fft.fftshift(img)))
+        fftimg = np.fft.ifftshift(np.fft.fft2(np.fft.fftshift(img)))
 
         return fftimg / np.max(np.abs(fftimg))
 
@@ -1635,7 +1631,7 @@ class Interface(object):
         :param img: The object image at certain phase and wavelength.
         :param ew: The effective wavelength
         :param phase: The orbital phase
-        :param xscale: The angular scale of the image the along East-West axis.
+        :param xscale: The angular scale of the image along East-West axis.
         :param yscale: The angular scale of the image along North-South axis.
         :param if_ew_precision: Resolution in effective wavelength.
         :param if_phase_precision: Resolution in phase.
@@ -2360,7 +2356,6 @@ class Interface(object):
                     else:
                         values = one_file[key]
                     compdict[key] = np.append(compdict[key], values)
-#                    compdict[key] = np.append(compdict[key], one_file[key])  # problem w. astropy!
 #                    print("key = ", key)  # dbg
 #                    print("one_file = ", one_file[key])  # dbg
 #                    print("compdict = ", compdict[key])  # dbg
@@ -2831,7 +2826,6 @@ class Interface(object):
                         continue
                     # read them from template and assign
                     value = self.__read_parameter_from_template(parname)
-                    #print parname, value  # dbg
                     dtype = self.__model[objname].get_parameter(parname, 'dtype')
                     try:
                         self.__model[objname][parname] = dtype(value)
@@ -2869,9 +2863,6 @@ class Interface(object):
             self.__spesyn['flux'] = []
 
         sedsyn = self.get_ew_and_phase(dtype)
-
-#        print "dtype = ", dtype  # dbg
-#        print "sedsyn = ", sedsyn  # dbg
 
         ncpu = self.__ncpu
         newphase = len(sedsyn['phase'])
@@ -3049,9 +3040,6 @@ class Interface(object):
                 obswave = self.__spe_comparison['eff_wave'][idx]
                 obsflux = self.__spe_comparison['flux'][idx]
 
-#            print "obswave = ", obswave  # dbg
-#            print "synwave = ", synwave  # dbg
-#            print "synflux = ", synflux  # dbg
             synflux_itp = interpolate1d_hermite(obswave, synwave, synflux)
 
             if dtype == 'sed':
